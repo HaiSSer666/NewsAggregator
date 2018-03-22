@@ -129,6 +129,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serealizator.cs" />
     <Compile Include="UserCredentials.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

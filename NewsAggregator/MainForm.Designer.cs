@@ -28,111 +28,108 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.lblWelcome = new System.Windows.Forms.Label();
-            this.txtTweet = new System.Windows.Forms.RichTextBox();
-            this.txtPIN = new System.Windows.Forms.TextBox();
-            this.lblPIN = new System.Windows.Forms.Label();
-            this.lblTweet = new System.Windows.Forms.Label();
-            this.btnPublishTweet = new System.Windows.Forms.Button();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.labelWelcomeMessage = new System.Windows.Forms.Label();
+            this.textboxTweet = new System.Windows.Forms.RichTextBox();
+            this.textfieldPIN = new System.Windows.Forms.TextBox();
+            this.labelPIN = new System.Windows.Forms.Label();
+            this.labelTweet = new System.Windows.Forms.Label();
+            this.buttonPublishTweet = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnLogin
+            // button login
             // 
-            this.btnLogin.Enabled = false;
-            this.btnLogin.Location = new System.Drawing.Point(225, 33);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(76, 23);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.loginButton.Enabled = false;
+            this.loginButton.Location = new System.Drawing.Point(225, 33);
+            this.loginButton.Name = "buttonLogin";
+            this.loginButton.Size = new System.Drawing.Size(76, 23);
+            this.loginButton.TabIndex = 2;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.ClickLoginButton);
             // 
-            // lblWelcome
+            // label wecome message
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Location = new System.Drawing.Point(18, 9);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(318, 13);
-            this.lblWelcome.TabIndex = 3;
-            this.lblWelcome.Text = "Welcome to News Aggregator. To use app authentificate yourself.";
-            this.lblWelcome.Click += new System.EventHandler(this.lblTweets_Click);
+            this.labelWelcomeMessage.AutoSize = true;
+            this.labelWelcomeMessage.Location = new System.Drawing.Point(18, 9);
+            this.labelWelcomeMessage.Name = "labelWelcomeMessage";
+            this.labelWelcomeMessage.Size = new System.Drawing.Size(318, 13);
+            this.labelWelcomeMessage.TabIndex = 3;
+            this.labelWelcomeMessage.Text = "Welcome to News Aggregator. To use app authentificate yourself.";
             // 
-            // txtTweet
+            // text tweet
             // 
-            this.txtTweet.Enabled = false;
-            this.txtTweet.Location = new System.Drawing.Point(21, 93);
-            this.txtTweet.Name = "txtTweet";
-            this.txtTweet.Size = new System.Drawing.Size(315, 75);
-            this.txtTweet.TabIndex = 4;
-            this.txtTweet.Text = "";
-            this.txtTweet.TextChanged += new System.EventHandler(this.txtTweet_Changed);
+            this.textboxTweet.Enabled = false;
+            this.textboxTweet.Location = new System.Drawing.Point(21, 93);
+            this.textboxTweet.Name = "textboxTweet";
+            this.textboxTweet.Size = new System.Drawing.Size(315, 75);
+            this.textboxTweet.TabIndex = 4;
+            this.textboxTweet.Text = "";
+            this.textboxTweet.TextChanged += new System.EventHandler(this.TextboxTweet_Changed);
             // 
-            // txtPIN
+            // text pin
             // 
-            this.txtPIN.Location = new System.Drawing.Point(124, 35);
-            this.txtPIN.Name = "txtPIN";
-            this.txtPIN.Size = new System.Drawing.Size(95, 20);
-            this.txtPIN.TabIndex = 0;
-            this.txtPIN.TextChanged += new System.EventHandler(this.txtPIN_Changed);
+            this.textfieldPIN.Location = new System.Drawing.Point(124, 35);
+            this.textfieldPIN.Name = "textfieldPIN";
+            this.textfieldPIN.Size = new System.Drawing.Size(95, 20);
+            this.textfieldPIN.TabIndex = 0;
+            this.textfieldPIN.TextChanged += new System.EventHandler(this.TextfieldPIN_Changed);
             // 
-            // lblPIN
+            // label pin
             // 
-            this.lblPIN.AutoSize = true;
-            this.lblPIN.Location = new System.Drawing.Point(18, 38);
-            this.lblPIN.Name = "lblPIN";
-            this.lblPIN.Size = new System.Drawing.Size(100, 13);
-            this.lblPIN.TabIndex = 5;
-            this.lblPIN.Text = "Enter your PIN here";
+            this.labelPIN.AutoSize = true;
+            this.labelPIN.Location = new System.Drawing.Point(18, 38);
+            this.labelPIN.Name = "labelPIN";
+            this.labelPIN.Size = new System.Drawing.Size(100, 13);
+            this.labelPIN.TabIndex = 5;
+            this.labelPIN.Text = "Enter your PIN here";
             // 
-            // lblTweet
+            // label tweet
             // 
-            this.lblTweet.AutoSize = true;
-            this.lblTweet.Location = new System.Drawing.Point(21, 74);
-            this.lblTweet.Name = "lblTweet";
-            this.lblTweet.Size = new System.Drawing.Size(87, 13);
-            this.lblTweet.TabIndex = 6;
-            this.lblTweet.Text = "Write your tweet:";
+            this.labelTweet.AutoSize = true;
+            this.labelTweet.Location = new System.Drawing.Point(21, 74);
+            this.labelTweet.Name = "labelTweet";
+            this.labelTweet.Size = new System.Drawing.Size(87, 13);
+            this.labelTweet.TabIndex = 6;
+            this.labelTweet.Text = "Write your tweet here:";
             // 
-            // btnPublishTweet
+            // button publish tweet
             // 
-            this.btnPublishTweet.Enabled = false;
-            this.btnPublishTweet.Location = new System.Drawing.Point(225, 175);
-            this.btnPublishTweet.Name = "btnPublishTweet";
-            this.btnPublishTweet.Size = new System.Drawing.Size(75, 23);
-            this.btnPublishTweet.TabIndex = 7;
-            this.btnPublishTweet.Text = "Publish";
-            this.btnPublishTweet.UseVisualStyleBackColor = true;
-            this.btnPublishTweet.Click += new System.EventHandler(this.btnPublishTweet_Click);
+            this.buttonPublishTweet.Enabled = false;
+            this.buttonPublishTweet.Location = new System.Drawing.Point(225, 175);
+            this.buttonPublishTweet.Name = "buttonPublishTweet";
+            this.buttonPublishTweet.Size = new System.Drawing.Size(75, 23);
+            this.buttonPublishTweet.TabIndex = 7;
+            this.buttonPublishTweet.Text = "Publish";
+            this.buttonPublishTweet.UseVisualStyleBackColor = true;
+            this.buttonPublishTweet.Click += new System.EventHandler(this.ClickButtonPublishTweet);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(361, 206);
-            this.Controls.Add(this.btnPublishTweet);
-            this.Controls.Add(this.lblTweet);
-            this.Controls.Add(this.lblPIN);
-            this.Controls.Add(this.txtTweet);
-            this.Controls.Add(this.lblWelcome);
-            this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.txtPIN);
+            this.Controls.Add(this.buttonPublishTweet);
+            this.Controls.Add(this.labelTweet);
+            this.Controls.Add(this.labelPIN);
+            this.Controls.Add(this.textboxTweet);
+            this.Controls.Add(this.labelWelcomeMessage);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.textfieldPIN);
             this.Name = "MainForm";
             this.Text = "News Aggregator";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            //this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Label lblWelcome;
-        private System.Windows.Forms.RichTextBox txtTweet;
-        private System.Windows.Forms.TextBox txtPIN;
-        private System.Windows.Forms.Label lblPIN;
-        private System.Windows.Forms.Label lblTweet;
-        private System.Windows.Forms.Button btnPublishTweet;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Button buttonPublishTweet;
+        private System.Windows.Forms.Label labelPIN;
+        private System.Windows.Forms.Label labelTweet;
+        private System.Windows.Forms.Label labelWelcomeMessage;
+        private System.Windows.Forms.RichTextBox textboxTweet;
+        private System.Windows.Forms.TextBox textfieldPIN;  
     }
 }
-
