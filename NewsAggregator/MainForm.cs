@@ -12,61 +12,12 @@ namespace NewsAggregator
 {
     public partial class MainForm : Form
     {
-        private LoginManager loginManager = new LoginManager();
         private TweetManager tweetPublisher = new TweetManager();
+
         
         public MainForm()
         {
             InitializeComponent();
-            if (loginManager.RestoreSessionWithCredentials())
-            {
-                loginButton.Enabled = false;
-                textfieldPIN.Enabled = false;
-                textboxTweet.Enabled = true;
-                MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
-            }
-            else
-            {
-                MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
-                try
-                {
-                    loginManager.LoginWithPIN();
-                }
-                catch (System.NullReferenceException ex)
-                {
-                    MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
-                    Application.Exit();
-                }
-            }
-        }
-
-        private void ClickLoginButton(object sender, EventArgs e)
-        {
-            try
-            {
-                loginManager.Login(textfieldPIN.Text);
-                MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
-                loginButton.Enabled = false;
-                textfieldPIN.Enabled = false;
-                textboxTweet.Enabled = true;
-            }
-            catch (System.NullReferenceException ex)
-            {
-                MessageBox.Show("Error is occured. There might be internet connection lost.\n Try to authenticate one more time.");
-                textfieldPIN.Clear();
-            }
-            catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
-            {
-                MessageBox.Show("Error is occured. You have entered the wrong PIN.\n Try to authenticate one more time. ");
-                textfieldPIN.Clear();
-                textfieldPIN.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Oops something went wrong.\n Try to authenticate one more time.");
-                textfieldPIN.Clear();
-                textfieldPIN.Enabled = true;
-            }
         }
 
         private void ClickButtonPublishTweet(object sender, EventArgs e)
@@ -85,16 +36,6 @@ namespace NewsAggregator
             {
                 Console.WriteLine("Something went wrong when we tried to execute the http request : '{0}'", ex.TwitterDescription);
             }
-        }
-
-        private void TextfieldPIN_Changed(object sender, EventArgs e)
-        {
-            UpdateButtonLogin();
-        }
-
-        private void UpdateButtonLogin()
-        {
-            loginButton.Enabled = textfieldPIN.Text.Trim() != string.Empty;
         }
 
         private void TextboxTweet_Changed(object sender, EventArgs e)
