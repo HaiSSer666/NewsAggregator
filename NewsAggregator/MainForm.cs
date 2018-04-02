@@ -14,7 +14,6 @@ namespace NewsAggregator
     {
         private TweetManager tweetPublisher = new TweetManager();
 
-        
         public MainForm()
         {
             InitializeComponent();

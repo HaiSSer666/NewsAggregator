@@ -8,6 +8,7 @@ namespace NewsAggregator
 {
     static class Program
     {
+        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +17,9 @@ namespace NewsAggregator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            LoginManager loginManager = new LoginManager();
+            loginManager.SetCredentials();
         }
     }
 }

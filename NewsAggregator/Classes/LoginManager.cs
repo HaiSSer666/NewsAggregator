@@ -36,7 +36,7 @@ namespace NewsAggregator
 
         public bool RestoreSessionWithCredentials()
         {
-            UserCredentials userCredentials = (UserCredentials)serealizator.Deserialize(PATH_TO_CREDENTIALS);
+            UserCredentials userCredentials = (UserCredentials)serealizator.Deserealize(PATH_TO_CREDENTIALS);
             if (userCredentials != null)
             {
                 this.appCredentials.AccessToken = userCredentials.userAccessToken;
@@ -58,8 +58,13 @@ namespace NewsAggregator
             {
                 userName = authenticatedUser.Name;
                 UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
-                serealizator.Serialize(credentialsToStore, PATH_TO_CREDENTIALS);
+                serealizator.Serealize(credentialsToStore, PATH_TO_CREDENTIALS);
             }
+        }
+
+        public void SetAppCredentials()
+        {
+            this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
         }
     }
 }
