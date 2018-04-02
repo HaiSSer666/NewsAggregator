@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tweetinvi;
-using Tweetinvi.Models;
+/*using Tweetinvi;
+using Tweetinvi.Models;*/
 /*using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;*/
@@ -17,68 +17,33 @@ namespace NewsAggregator
 {
     public partial class MainForm : Form
     {
-        private IAuthenticationContext authenticationContext;
-        private ITwitterCredentials appCredentials;
-        private Serealizator serealizator = new Serealizator();
+        private LoginManager loginManager = new LoginManager();
+        private TweetManager tweetPublisher = new TweetManager();
         
         public MainForm()
         {
             InitializeComponent();
-            appCredentials = new TwitterCredentials("YtCb9DV9tiVk143hwd8WxkvJx", "8aSPJYvRT8djByuofStlwd1jL9TJwoMekhKCOybBsmZ8ld3qOJ");
-            if(RestoreSessionWithCredentials(appCredentials))
+            loginManager.SetAppCredentials();
+            if(loginManager.RestoreSessionWithCredentials(loginManager.appCredentials))
             {
                 loginButton.Enabled = false;
                 textfieldPIN.Enabled = false;
                 textboxTweet.Enabled = true;
+                MessageBox.Show("Hello. " + loginManager.authenticatedUser.Name + "! Now you can use app.");
             }
             else
             {
-                LoginWithPIN(appCredentials);
+                MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
+                loginManager.LoginWithPIN(loginManager.appCredentials);
             }
         }
-
-        private void LoginWithPIN(ITwitterCredentials credentials)
-        {
-            authenticationContext = AuthFlow.InitAuthentication(credentials);
-            try
-            {
-                System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
-            }
-            catch (System.NullReferenceException ex)
-            {
-                MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
-                Application.Exit();
-            }
-        }
-
-        private bool RestoreSessionWithCredentials(ITwitterCredentials credentials)
-        {
-            UserCredentials userCredentials = serealizator.Deserealize();
-            if(userCredentials!=null)
-            {
-                credentials.AccessToken = userCredentials.userAccessToken;
-                credentials.AccessTokenSecret = userCredentials.userAccessSecret;
-                Auth.SetCredentials(credentials);
-                return User.GetAuthenticatedUser() != null;
-            }
-            return false;
-        } 
 
         private void ClickLoginButton(object sender, EventArgs e)
         {
-            IAuthenticatedUser authenticatedUser;
-
             try
             {
-                var userCredentials = AuthFlow.CreateCredentialsFromVerifierCode(textfieldPIN.Text, this.authenticationContext);
-                Auth.SetCredentials(userCredentials);
-                authenticatedUser = User.GetAuthenticatedUser();
-                if(authenticatedUser != null)
-                {
-                    UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
-                    serealizator.Serealize(credentialsToStore);
-                }
-                MessageBox.Show("Hello. " + authenticatedUser.Name + "! Now you can use app.");
+                loginManager.Login(textfieldPIN.Text);
+                MessageBox.Show("Hello. " + loginManager.authenticatedUser.Name + "! Now you can use app.");
                 loginButton.Enabled = false;
                 textfieldPIN.Enabled = false;
                 textboxTweet.Enabled = true;
@@ -87,21 +52,18 @@ namespace NewsAggregator
             {
                 MessageBox.Show("Error is occured. There might be internet connection lost.\n Try to authenticate one more time.");
                 textfieldPIN.Clear();
-                //this.genarateURL();
             }
             catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
             {
                 MessageBox.Show("Error is occured. You have entered the wrong PIN.\n Try to authenticate one more time. ");
                 textfieldPIN.Clear();
                 textfieldPIN.Enabled = true;
-                //this.genarateURL();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Oops something went wrong.\n Try to authenticate one more time.");
                 textfieldPIN.Clear();
                 textfieldPIN.Enabled = true;
-                //this.genarateURL();
             }
         }
 
@@ -109,8 +71,8 @@ namespace NewsAggregator
         {
             try
             {
-                var tweet = Tweet.PublishTweet(textboxTweet.Text.Trim());
-                MessageBox.Show("Your tweet was published!");
+                tweetPublisher.PublishTweet(textboxTweet.Text);
+                MessageBox.Show("Your tweet was successfully published!");
                 textboxTweet.Clear();
             }
             catch (ArgumentException ex)

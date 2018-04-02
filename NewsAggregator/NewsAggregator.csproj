@@ -129,8 +129,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Serealizator.cs" />
-    <Compile Include="UserCredentials.cs" />
+    <Compile Include="Interfaces\IPublishTweet.cs" />
+    <Compile Include="Interfaces\ISerealizator.cs" />
+    <Compile Include="Classes\LoginManager.cs" />
+    <Compile Include="Classes\Serealizator.cs" />
+    <Compile Include="Classes\TweetManager.cs" />
+    <Compile Include="Misc\UserCredentials.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

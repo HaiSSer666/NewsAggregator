@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator
 {
-    class Serealizator
+    class Serealizator : ISerealizator
     {
         public void Serealize(UserCredentials userCredentials)
         {
