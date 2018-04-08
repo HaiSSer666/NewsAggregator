@@ -7,11 +7,11 @@ using Tweetinvi;
 
 namespace NewsAggregator
 {
-    class TweetManager : IPublishTweet
+    class TweetManager
     {
         public void PublishTweet(string tweetText)
         {
-            var tweet = Tweet.PublishTweet(tweetText.Trim());
+            Tweet.PublishTweet(tweetText.Trim());
         }
     }
 }
