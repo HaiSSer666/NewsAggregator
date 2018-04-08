@@ -31,15 +31,7 @@ namespace NewsAggregator
         public void LoginWithPIN()
         {
             authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
-            try
-            {
-                System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
-            }
-            catch (System.NullReferenceException ex)
-            {
-                MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
-                Application.Exit();
-            }
+            System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
         }
 
         public bool RestoreSessionWithCredentials()

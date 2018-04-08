@@ -7,11 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-/*using Tweetinvi;
-using Tweetinvi.Models;*/
-/*using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.IO;*/
 
 namespace NewsAggregator
 {
@@ -23,7 +18,7 @@ namespace NewsAggregator
         public MainForm()
         {
             InitializeComponent();
-            if(loginManager.RestoreSessionWithCredentials())
+            if (loginManager.RestoreSessionWithCredentials())
             {
                 loginButton.Enabled = false;
                 textfieldPIN.Enabled = false;
@@ -33,7 +28,15 @@ namespace NewsAggregator
             else
             {
                 MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
-                loginManager.LoginWithPIN();
+                try
+                {
+                    loginManager.LoginWithPIN();
+                }
+                catch (System.NullReferenceException ex)
+                {
+                    MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
+                    Application.Exit();
+                }
             }
         }
 
