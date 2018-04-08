@@ -17,6 +17,5 @@ namespace NewsAggregator
             this.userAccessToken = userAccessToken;
             this.userAccessSecret = userAccessSecret;
         }
-
     }
 }
