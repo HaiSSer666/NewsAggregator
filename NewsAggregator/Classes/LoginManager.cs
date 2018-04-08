@@ -19,6 +19,7 @@ namespace NewsAggregator
 
         private const string CONSUMER_KEY = "YtCb9DV9tiVk143hwd8WxkvJx";
         private const string CONSUMER_SECRET = "8aSPJYvRT8djByuofStlwd1jL9TJwoMekhKCOybBsmZ8ld3qOJ";
+        private const string PATH_TO_CREDENTIALS = "UserCredentials.bin";
 
         public string userName;
 
@@ -43,7 +44,7 @@ namespace NewsAggregator
 
         public bool RestoreSessionWithCredentials()
         {
-            UserCredentials userCredentials = serealizator.Deserealize();
+            UserCredentials userCredentials = (UserCredentials)serealizator.Deserialize(PATH_TO_CREDENTIALS);
             if (userCredentials != null)
             {
                 this.appCredentials.AccessToken = userCredentials.userAccessToken;
@@ -65,7 +66,7 @@ namespace NewsAggregator
             {
                 userName = authenticatedUser.Name;
                 UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
-                serealizator.Serealize(credentialsToStore);
+                serealizator.Serialize(credentialsToStore, PATH_TO_CREDENTIALS);
             }
         }
     }

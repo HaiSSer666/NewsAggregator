@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator
 {
-    interface ISerealizator
+    interface ISerializator
     {
-        void Serealize(UserCredentials userCredentials);
-        UserCredentials Deserealize();
+        void Serialize(object userCredentials, string pathToFile);
+        object Deserialize(string pathToFile);
     }
 }
