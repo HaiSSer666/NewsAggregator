@@ -23,18 +23,17 @@ namespace NewsAggregator
         public MainForm()
         {
             InitializeComponent();
-            loginManager.SetAppCredentials();
-            if(loginManager.RestoreSessionWithCredentials(loginManager.appCredentials))
+            if(loginManager.RestoreSessionWithCredentials())
             {
                 loginButton.Enabled = false;
                 textfieldPIN.Enabled = false;
                 textboxTweet.Enabled = true;
-                MessageBox.Show("Hello. " + loginManager.authenticatedUser.Name + "! Now you can use app.");
+                MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
             }
             else
             {
                 MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
-                loginManager.LoginWithPIN(loginManager.appCredentials);
+                loginManager.LoginWithPIN();
             }
         }
 
@@ -43,7 +42,7 @@ namespace NewsAggregator
             try
             {
                 loginManager.Login(textfieldPIN.Text);
-                MessageBox.Show("Hello. " + loginManager.authenticatedUser.Name + "! Now you can use app.");
+                MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
                 loginButton.Enabled = false;
                 textfieldPIN.Enabled = false;
                 textboxTweet.Enabled = true;

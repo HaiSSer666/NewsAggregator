@@ -13,16 +13,23 @@ namespace NewsAggregator
     {
         private Serealizator serealizator = new Serealizator();
 
-        public IAuthenticationContext authenticationContext { get; set; }
-        public ITwitterCredentials appCredentials { get; set; }
-        public IAuthenticatedUser authenticatedUser { get; set; }
+        private IAuthenticationContext authenticationContext { get; set; }
+        private ITwitterCredentials appCredentials { get; set; }
+        private IAuthenticatedUser authenticatedUser { get; set; }
 
         private const string CONSUMER_KEY = "YtCb9DV9tiVk143hwd8WxkvJx";
         private const string CONSUMER_SECRET = "8aSPJYvRT8djByuofStlwd1jL9TJwoMekhKCOybBsmZ8ld3qOJ";
 
-        public void LoginWithPIN(ITwitterCredentials credentials)
+        public string userName;
+
+        public LoginManager()
         {
-            authenticationContext = AuthFlow.InitAuthentication(credentials);
+            this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
+        }
+
+        public void LoginWithPIN()
+        {
+            authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
             try
             {
                 System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
@@ -34,15 +41,16 @@ namespace NewsAggregator
             }
         }
 
-        public bool RestoreSessionWithCredentials(ITwitterCredentials credentials)
+        public bool RestoreSessionWithCredentials()
         {
             UserCredentials userCredentials = serealizator.Deserealize();
             if (userCredentials != null)
             {
-                credentials.AccessToken = userCredentials.userAccessToken;
-                credentials.AccessTokenSecret = userCredentials.userAccessSecret;
-                Auth.SetCredentials(credentials);
+                this.appCredentials.AccessToken = userCredentials.userAccessToken;
+                this.appCredentials.AccessTokenSecret = userCredentials.userAccessSecret;
+                Auth.SetCredentials(this.appCredentials);
                 authenticatedUser = User.GetAuthenticatedUser();
+                userName = authenticatedUser.Name;
                 return authenticatedUser != null;
             }
             return false;
@@ -55,14 +63,10 @@ namespace NewsAggregator
             authenticatedUser = User.GetAuthenticatedUser();
             if (authenticatedUser != null)
             {
+                userName = authenticatedUser.Name;
                 UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
                 serealizator.Serealize(credentialsToStore);
             }
-        }
-
-        public void SetAppCredentials()
-        {
-            this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
         }
     }
 }
