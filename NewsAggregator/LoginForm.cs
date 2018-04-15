@@ -12,7 +12,7 @@ namespace NewsAggregator
 {
     public partial class LoginForm : Form
     {
-        private LoginManager loginManager = new LoginManager();
+        private LoginManager loginManager = LoginManager.Instance;
         public MainForm mainForm = new MainForm();
 
         public LoginForm()

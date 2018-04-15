@@ -9,8 +9,10 @@ using Tweetinvi.Models;
 
 namespace NewsAggregator
 {
-    class LoginManager
+    public class LoginManager
     {
+        private static LoginManager manager;
+
         private Serealizator serealizator = new Serealizator();
 
         private IAuthenticationContext authenticationContext { get; set; }
@@ -32,6 +34,48 @@ namespace NewsAggregator
         {
             authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
             System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
+        }
+
+        public static LoginManager Instance
+        {
+            get
+            {
+                if (manager == null)
+                {
+                    manager = new LoginManager();
+                }
+                return manager;
+            }
+        }
+
+        public void InitialiseSession()
+        {
+            if (RestoreSessionWithCredentials(appCredentials))
+            {
+                MessageBox.Show("Hello. " + authenticatedUser.Name + "! Now you can use app.");
+                Application.Run(new MainForm());
+            }
+            else
+            {
+                MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
+                GenerateAuthenticationPIN(appCredentials);
+                Application.Run(new LoginForm());
+            }
+        }
+
+        public void GenerateAuthenticationPIN(ITwitterCredentials credentials)
+        {
+            this.authenticationContext = AuthFlow.InitAuthentication(credentials);
+            Console.WriteLine();
+            try
+            {
+                System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
+                Application.Exit();
+            }
         }
 
         public bool RestoreSessionWithCredentials()
@@ -60,11 +104,6 @@ namespace NewsAggregator
                 UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
                 serealizator.Serealize(credentialsToStore, PATH_TO_CREDENTIALS);
             }
-        }
-
-        public void SetAppCredentials()
-        {
-            this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
         }
     }
 }

@@ -18,8 +18,8 @@ namespace NewsAggregator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LoginManager loginManager = new LoginManager();
-            loginManager.SetCredentials();
+            LoginManager loginManager = LoginManager.Instance;
+            loginManager.InitialiseSession();
         }
     }
 }
