@@ -25,13 +25,13 @@ namespace NewsAggregator
             try
             {
                 loginManager.Login(textfieldPIN.Text);
-                MessageBox.Show("Hello. " + loginManager.authenticatedUser.Name + "! Now you can use app.");
+                MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
                 this.Hide();
                 mainForm.Show();
             }
             catch (System.NullReferenceException ex)
             {
-                //MessageBox.Show("Error is occured. There might be internet connection lost.\n Try to authenticate one more time.");
+                MessageBox.Show("Error is occured. There might be internet connection lost.\n Try to authenticate one more time.");
                 textfieldPIN.Clear();
             }
             catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)

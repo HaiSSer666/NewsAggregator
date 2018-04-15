@@ -50,7 +50,7 @@ namespace NewsAggregator
 
         public void InitialiseSession()
         {
-            if (RestoreSessionWithCredentials(appCredentials))
+            if (RestoreSessionWithCredentials())
             {
                 MessageBox.Show("Hello. " + authenticatedUser.Name + "! Now you can use app.");
                 Application.Run(new MainForm());
@@ -80,7 +80,7 @@ namespace NewsAggregator
 
         public bool RestoreSessionWithCredentials()
         {
-            UserCredentials userCredentials = (UserCredentials)serealizator.Deserealize(PATH_TO_CREDENTIALS);
+            UserCredentials userCredentials = (UserCredentials)serealizator.Deserialize(PATH_TO_CREDENTIALS);
             if (userCredentials != null)
             {
                 this.appCredentials.AccessToken = userCredentials.userAccessToken;
@@ -102,7 +102,7 @@ namespace NewsAggregator
             {
                 userName = authenticatedUser.Name;
                 UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
-                serealizator.Serealize(credentialsToStore, PATH_TO_CREDENTIALS);
+                serealizator.Serialize(credentialsToStore, PATH_TO_CREDENTIALS);
             }
         }
     }
