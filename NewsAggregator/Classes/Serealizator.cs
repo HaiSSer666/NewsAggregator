@@ -41,5 +41,3 @@ namespace NewsAggregator
         }
     }
 }
-
-// c:\users\admin\documents\visual studio 2015\Projects\NewsAggregator\

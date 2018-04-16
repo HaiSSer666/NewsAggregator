@@ -12,11 +12,13 @@ namespace NewsAggregator
 {
     public partial class MainForm : Form
     {
+        private LoginManager loginManager = LoginManager.Instance;
         private TweetManager tweetPublisher = new TweetManager();
 
         public MainForm()
         {
             InitializeComponent();
+            MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
         }
 
         private void ClickButtonPublishTweet(object sender, EventArgs e)

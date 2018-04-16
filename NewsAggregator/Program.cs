@@ -18,8 +18,18 @@ namespace NewsAggregator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LoginManager loginManager = LoginManager.Instance;
-            loginManager.InitialiseSession();
+            
+            try
+            {
+                LoginManager loginManager = LoginManager.Instance;
+                loginManager.InitializeSession();
+            }
+            catch (System.NullReferenceException ex)
+            {
+                MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
+                Application.Exit();
+            }
+            
         }
     }
 }

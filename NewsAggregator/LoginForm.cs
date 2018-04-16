@@ -18,13 +18,14 @@ namespace NewsAggregator
         public LoginForm()
         {
             InitializeComponent();
+            MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
         }
 
         private void ClickLoginButton(object sender, EventArgs e)
         {
             try
             {
-                loginManager.Login(textfieldPIN.Text);
+                loginManager.LoginWithPIN(textfieldPIN.Text);
                 MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
                 this.Hide();
                 mainForm.Show();

@@ -12,7 +12,6 @@ namespace NewsAggregator
     public class LoginManager
     {
         private static LoginManager manager;
-
         private Serealizator serealizator = new Serealizator();
 
         private IAuthenticationContext authenticationContext { get; set; }
@@ -28,13 +27,7 @@ namespace NewsAggregator
         public LoginManager()
         {
             this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
-        }
-
-        public void LoginWithPIN()
-        {
-            authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
-            System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
-        }
+        } 
 
         public static LoginManager Instance
         {
@@ -48,16 +41,14 @@ namespace NewsAggregator
             }
         }
 
-        public void InitialiseSession()
+        public void InitializeSession()
         {
             if (RestoreSessionWithCredentials())
             {
-                MessageBox.Show("Hello. " + authenticatedUser.Name + "! Now you can use app.");
                 Application.Run(new MainForm());
             }
             else
             {
-                MessageBox.Show("You are not authorised user, Please enter a valid PIN from the generated link.");
                 GenerateAuthenticationPIN(appCredentials);
                 Application.Run(new LoginForm());
             }
@@ -65,17 +56,8 @@ namespace NewsAggregator
 
         public void GenerateAuthenticationPIN(ITwitterCredentials credentials)
         {
-            this.authenticationContext = AuthFlow.InitAuthentication(credentials);
-            Console.WriteLine();
-            try
-            {
-                System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
-            }
-            catch (System.NullReferenceException ex)
-            {
-                MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
-                Application.Exit();
-            }
+            authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
+            System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
         }
 
         public bool RestoreSessionWithCredentials()
@@ -93,7 +75,7 @@ namespace NewsAggregator
             return false;
         }
 
-        public void Login(string PIN)
+        public void LoginWithPIN(string PIN)
         {
             var userCredentials = AuthFlow.CreateCredentialsFromVerifierCode(PIN, this.authenticationContext);
             Auth.SetCredentials(userCredentials);

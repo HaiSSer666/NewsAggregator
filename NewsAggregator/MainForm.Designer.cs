@@ -70,7 +70,7 @@
             this.labelWelcomeMessage.Name = "labelWelcomeMessage";
             this.labelWelcomeMessage.Size = new System.Drawing.Size(318, 13);
             this.labelWelcomeMessage.TabIndex = 3;
-            this.labelWelcomeMessage.Text = "Welcome to News Aggregator. To use app authentificate yourself.";
+            this.labelWelcomeMessage.Text = "Welcome to News Aggregator.";
             // 
             // MainForm
             // 
