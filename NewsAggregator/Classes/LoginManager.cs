@@ -9,8 +9,9 @@ using Tweetinvi.Models;
 
 namespace NewsAggregator
 {
-    class LoginManager
+    public class LoginManager
     {
+        private static LoginManager manager;
         private Serealizator serealizator = new Serealizator();
 
         private IAuthenticationContext authenticationContext { get; set; }
@@ -26,9 +27,34 @@ namespace NewsAggregator
         public LoginManager()
         {
             this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
+        } 
+
+        public static LoginManager Instance
+        {
+            get
+            {
+                if (manager == null)
+                {
+                    manager = new LoginManager();
+                }
+                return manager;
+            }
         }
 
-        public void LoginWithPIN()
+        public void InitializeSession()
+        {
+            if (RestoreSessionWithCredentials())
+            {
+                Application.Run(new MainForm());
+            }
+            else
+            {
+                GenerateAuthenticationPIN(appCredentials);
+                Application.Run(new LoginForm());
+            }
+        }
+
+        public void GenerateAuthenticationPIN(ITwitterCredentials credentials)
         {
             authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
             System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
@@ -49,7 +75,7 @@ namespace NewsAggregator
             return false;
         }
 
-        public void Login(string PIN)
+        public void LoginWithPIN(string PIN)
         {
             var userCredentials = AuthFlow.CreateCredentialsFromVerifierCode(PIN, this.authenticationContext);
             Auth.SetCredentials(userCredentials);
