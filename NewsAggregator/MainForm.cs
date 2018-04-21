@@ -12,13 +12,12 @@ namespace NewsAggregator
 {
     public partial class MainForm : Form
     {
-        private LoginManager loginManager = LoginManager.Instance;
         private TweetManager tweetPublisher = new TweetManager();
+        public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
 
         public MainForm()
         {
             InitializeComponent();
-            MessageBox.Show("Hello. " + loginManager.userName + "! Now you can use app.");
         }
 
         private void ClickButtonPublishTweet(object sender, EventArgs e)
@@ -47,6 +46,16 @@ namespace NewsAggregator
         private void UpdateButtonPublish()
         {
             buttonPublishTweet.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
-        }    
+        }
+
+        private void OnFinish(Error error)
+        {
+            Console.WriteLine();
+        }
+
+        private void tweeterLoginButton_Click(object sender, EventArgs e)
+        {
+            loginManagerFacade.Login(SocialNetwork.Tweeter, OnFinish);
+        }
     }
 }

@@ -32,6 +32,7 @@
             this.labelTweet = new System.Windows.Forms.Label();
             this.buttonPublishTweet = new System.Windows.Forms.Button();
             this.labelWelcomeMessage = new System.Windows.Forms.Label();
+            this.tweeterLoginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textboxTweet
@@ -68,15 +69,26 @@
             this.labelWelcomeMessage.AutoSize = true;
             this.labelWelcomeMessage.Location = new System.Drawing.Point(18, 9);
             this.labelWelcomeMessage.Name = "labelWelcomeMessage";
-            this.labelWelcomeMessage.Size = new System.Drawing.Size(318, 13);
+            this.labelWelcomeMessage.Size = new System.Drawing.Size(152, 13);
             this.labelWelcomeMessage.TabIndex = 3;
             this.labelWelcomeMessage.Text = "Welcome to News Aggregator.";
+            // 
+            // tweeterLoginButton
+            // 
+            this.tweeterLoginButton.Location = new System.Drawing.Point(437, 35);
+            this.tweeterLoginButton.Name = "tweeterLoginButton";
+            this.tweeterLoginButton.Size = new System.Drawing.Size(75, 23);
+            this.tweeterLoginButton.TabIndex = 8;
+            this.tweeterLoginButton.Text = "button1";
+            this.tweeterLoginButton.UseVisualStyleBackColor = true;
+            this.tweeterLoginButton.Click += new System.EventHandler(this.tweeterLoginButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 179);
+            this.ClientSize = new System.Drawing.Size(568, 182);
+            this.Controls.Add(this.tweeterLoginButton);
             this.Controls.Add(this.buttonPublishTweet);
             this.Controls.Add(this.labelTweet);
             this.Controls.Add(this.textboxTweet);
@@ -93,5 +105,6 @@
         private System.Windows.Forms.Label labelTweet;
         private System.Windows.Forms.RichTextBox textboxTweet;
         public System.Windows.Forms.Label labelWelcomeMessage;
+        private System.Windows.Forms.Button tweeterLoginButton;
     }
 }
