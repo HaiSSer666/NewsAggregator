@@ -8,7 +8,7 @@ namespace NewsAggregator
 {
     static class Program
     {
-        
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -17,19 +17,7 @@ namespace NewsAggregator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            
-            try
-            {
-                LoginManager loginManager = LoginManager.Instance;
-                loginManager.InitializeSession();
-            }
-            catch (System.NullReferenceException ex)
-            {
-                MessageBox.Show("Error is occured. Authentication was not successful.\n Try to start app one more time.");
-                Application.Exit();
-            }
-            
+            Application.Run(new MainForm());
         }
     }
 }

@@ -129,16 +129,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\LoginManagerFacade.cs" />
+    <Compile Include="Classes\SharedTypes.cs" />
+    <Compile Include="Classes\TweeterLoginManager.cs" />
+    <Compile Include="Error.cs" />
+    <Compile Include="Interfaces\ILoginManager.cs" />
     <Compile Include="Interfaces\IPublishTweet.cs" />
     <Compile Include="Interfaces\ISerealizator.cs" />
-    <Compile Include="Classes\LoginManager.cs" />
     <Compile Include="Classes\Serealizator.cs" />
     <Compile Include="Classes\TweetManager.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="TweeterPinEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <Compile Include="TweeterPinEntryForm.Designer.cs">
+      <DependentUpon>TweeterPinEntryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\UserCredentials.cs" />
     <Compile Include="MainForm.cs">
@@ -149,8 +153,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="TweeterPinEntryForm.resx">
+      <DependentUpon>TweeterPinEntryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
