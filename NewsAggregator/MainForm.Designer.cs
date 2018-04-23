@@ -36,7 +36,8 @@
             this.SuspendLayout();
             // 
             // textboxTweet
-            // 
+            //
+            this.textboxTweet.Enabled = false; 
             this.textboxTweet.Location = new System.Drawing.Point(21, 61);
             this.textboxTweet.Name = "textboxTweet";
             this.textboxTweet.Size = new System.Drawing.Size(315, 75);
@@ -56,11 +57,11 @@
             // buttonPublishTweet
             // 
             this.buttonPublishTweet.Enabled = false;
-            this.buttonPublishTweet.Location = new System.Drawing.Point(261, 142);
+            this.buttonPublishTweet.Location = new System.Drawing.Point(236, 147);
             this.buttonPublishTweet.Name = "buttonPublishTweet";
-            this.buttonPublishTweet.Size = new System.Drawing.Size(75, 23);
+            this.buttonPublishTweet.Size = new System.Drawing.Size(100, 23);
             this.buttonPublishTweet.TabIndex = 7;
-            this.buttonPublishTweet.Text = "Publish";
+            this.buttonPublishTweet.Text = "Publish tweet";
             this.buttonPublishTweet.UseVisualStyleBackColor = true;
             this.buttonPublishTweet.Click += new System.EventHandler(this.ClickButtonPublishTweet);
             // 
@@ -75,11 +76,12 @@
             // 
             // tweeterLoginButton
             // 
-            this.tweeterLoginButton.Location = new System.Drawing.Point(437, 35);
+            //this.tweeterLoginButton.Enabled = false;
+            this.tweeterLoginButton.Location = new System.Drawing.Point(21, 147);
             this.tweeterLoginButton.Name = "tweeterLoginButton";
-            this.tweeterLoginButton.Size = new System.Drawing.Size(75, 23);
+            this.tweeterLoginButton.Size = new System.Drawing.Size(100, 23);
             this.tweeterLoginButton.TabIndex = 8;
-            this.tweeterLoginButton.Text = "button1";
+            this.tweeterLoginButton.Text = "Login to Tweeter";
             this.tweeterLoginButton.UseVisualStyleBackColor = true;
             this.tweeterLoginButton.Click += new System.EventHandler(this.tweeterLoginButton_Click);
             // 
@@ -87,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 182);
+            this.ClientSize = new System.Drawing.Size(357, 182);
             this.Controls.Add(this.tweeterLoginButton);
             this.Controls.Add(this.buttonPublishTweet);
             this.Controls.Add(this.labelTweet);
