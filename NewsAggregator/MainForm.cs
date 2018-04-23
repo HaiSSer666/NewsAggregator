@@ -10,14 +10,22 @@ using System.Windows.Forms;
 
 namespace NewsAggregator
 {
+    public delegate void TweetTextCallback(string tweetText);
+
     public partial class MainForm : Form
     {
         private TweetManager tweetPublisher = new TweetManager();
         public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
 
         public MainForm()
-        {
+        {     
             InitializeComponent();
+            loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
+            {
+                textboxTweet.Enabled = true;
+                tweeterLoginButton.Enabled = false;
+            }));
+            Console.WriteLine();
         }
 
         private void ClickButtonPublishTweet(object sender, EventArgs e)
@@ -50,7 +58,8 @@ namespace NewsAggregator
 
         private void OnFinish(Error error)
         {
-            Console.WriteLine();
+            textboxTweet.Enabled = true;
+            tweeterLoginButton.Enabled = false;
         }
 
         private void tweeterLoginButton_Click(object sender, EventArgs e)

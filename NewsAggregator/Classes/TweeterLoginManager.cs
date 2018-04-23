@@ -30,16 +30,9 @@ namespace NewsAggregator
         public void Login(LoginCallback loginCallback)
         {
             this.loginCallback = loginCallback;
-            if (RestoreSessionWithCredentials())
-            {
-                this.loginCallback(null);
-            }
-            else
-            {
-                tweeterPinEntryForm.pinCallback = LoginWithPIN;
-                GenerateAuthenticationPIN(appCredentials);
-                tweeterPinEntryForm.ShowDialog();
-            }
+            tweeterPinEntryForm.pinCallback = LoginWithPIN;
+            GenerateAuthenticationPIN(appCredentials);
+            tweeterPinEntryForm.ShowDialog();
         }
 
         public void LoginWithPIN(string PIN)
@@ -59,7 +52,7 @@ namespace NewsAggregator
             }
         }
 
-        public bool RestoreSessionWithCredentials()
+        public void RestoreSession(RestoreCallback restoreCallback)
         {
             UserCredentials userCredentials = (UserCredentials)serealizator.Deserialize(PATH_TO_CREDENTIALS);
             if (userCredentials != null)
@@ -67,9 +60,8 @@ namespace NewsAggregator
                 this.appCredentials.AccessToken = userCredentials.userAccessToken;
                 this.appCredentials.AccessTokenSecret = userCredentials.userAccessSecret;
                 Auth.SetCredentials(this.appCredentials);
-                return User.GetAuthenticatedUser() != null;
+                restoreCallback();
             }
-            return false;
         }
 
         public void GenerateAuthenticationPIN(ITwitterCredentials credentials)

@@ -25,5 +25,21 @@ namespace NewsAggregator
                     } 
             }
         }
+
+        public void RestoreSession(SocialNetwork socialNetwork, RestoreCallback restoreCallback)
+        {
+            switch (socialNetwork)
+            {
+                case SocialNetwork.Tweeter:
+                    {
+                        tweeterLoginManager.RestoreSession(restoreCallback);
+                        break;
+                    }
+                case SocialNetwork.Facebook:
+                    {
+                        break;
+                    }
+            }
+        }
     }
 }
