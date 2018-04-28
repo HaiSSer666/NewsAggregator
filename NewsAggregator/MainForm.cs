@@ -25,7 +25,6 @@ namespace NewsAggregator
                 textboxTweet.Enabled = true;
                 tweeterLoginButton.Enabled = false;
             }));
-            Console.WriteLine();
         }
 
         private void ClickButtonPublishTweet(object sender, EventArgs e)
