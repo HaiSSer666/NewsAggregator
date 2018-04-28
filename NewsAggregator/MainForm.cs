@@ -14,7 +14,7 @@ namespace NewsAggregator
 
     public partial class MainForm : Form
     {
-        private TweetManager tweetPublisher = new TweetManager();
+        private TweeterPublishManager tweetPublisher = new TweeterPublishManager();
         public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
 
         public MainForm()
