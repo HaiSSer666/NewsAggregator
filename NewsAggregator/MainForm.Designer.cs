@@ -32,10 +32,12 @@
             this.labelTweet = new System.Windows.Forms.Label();
             this.buttonPublishTweet = new System.Windows.Forms.Button();
             this.labelWelcomeMessage = new System.Windows.Forms.Label();
+            this.tweeterLoginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textboxTweet
-            // 
+            //
+            this.textboxTweet.Enabled = false; 
             this.textboxTweet.Location = new System.Drawing.Point(21, 61);
             this.textboxTweet.Name = "textboxTweet";
             this.textboxTweet.Size = new System.Drawing.Size(315, 75);
@@ -55,11 +57,11 @@
             // buttonPublishTweet
             // 
             this.buttonPublishTweet.Enabled = false;
-            this.buttonPublishTweet.Location = new System.Drawing.Point(261, 142);
+            this.buttonPublishTweet.Location = new System.Drawing.Point(236, 147);
             this.buttonPublishTweet.Name = "buttonPublishTweet";
-            this.buttonPublishTweet.Size = new System.Drawing.Size(75, 23);
+            this.buttonPublishTweet.Size = new System.Drawing.Size(100, 23);
             this.buttonPublishTweet.TabIndex = 7;
-            this.buttonPublishTweet.Text = "Publish";
+            this.buttonPublishTweet.Text = "Publish tweet";
             this.buttonPublishTweet.UseVisualStyleBackColor = true;
             this.buttonPublishTweet.Click += new System.EventHandler(this.ClickButtonPublishTweet);
             // 
@@ -68,15 +70,27 @@
             this.labelWelcomeMessage.AutoSize = true;
             this.labelWelcomeMessage.Location = new System.Drawing.Point(18, 9);
             this.labelWelcomeMessage.Name = "labelWelcomeMessage";
-            this.labelWelcomeMessage.Size = new System.Drawing.Size(318, 13);
+            this.labelWelcomeMessage.Size = new System.Drawing.Size(152, 13);
             this.labelWelcomeMessage.TabIndex = 3;
             this.labelWelcomeMessage.Text = "Welcome to News Aggregator.";
+            // 
+            // tweeterLoginButton
+            // 
+            //this.tweeterLoginButton.Enabled = false;
+            this.tweeterLoginButton.Location = new System.Drawing.Point(21, 147);
+            this.tweeterLoginButton.Name = "tweeterLoginButton";
+            this.tweeterLoginButton.Size = new System.Drawing.Size(100, 23);
+            this.tweeterLoginButton.TabIndex = 8;
+            this.tweeterLoginButton.Text = "Login to Tweeter";
+            this.tweeterLoginButton.UseVisualStyleBackColor = true;
+            this.tweeterLoginButton.Click += new System.EventHandler(this.tweeterLoginButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 179);
+            this.ClientSize = new System.Drawing.Size(357, 182);
+            this.Controls.Add(this.tweeterLoginButton);
             this.Controls.Add(this.buttonPublishTweet);
             this.Controls.Add(this.labelTweet);
             this.Controls.Add(this.textboxTweet);
@@ -93,5 +107,6 @@
         private System.Windows.Forms.Label labelTweet;
         private System.Windows.Forms.RichTextBox textboxTweet;
         public System.Windows.Forms.Label labelWelcomeMessage;
+        private System.Windows.Forms.Button tweeterLoginButton;
     }
 }

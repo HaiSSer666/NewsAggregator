@@ -1,6 +1,6 @@
 ﻿namespace NewsAggregator
 {
-    partial class LoginForm
+    partial class TweeterPinEntryForm
     {
         /// <summary>
         /// Required designer variable.
