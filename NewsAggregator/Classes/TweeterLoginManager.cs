@@ -25,7 +25,7 @@ namespace NewsAggregator
         public TweeterLoginManager()
         {
             this.appCredentials = new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET);
-        }
+        } 
 
         public void Login(LoginCallback loginCallback)
         {
