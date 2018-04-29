@@ -14,26 +14,27 @@ namespace NewsAggregator
 
     public partial class MainForm : Form
     {
-        private TweetManager tweetPublisher = new TweetManager();
         public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
+        public PublishFacade publishFacade = new PublishFacade();
 
         public MainForm()
         {     
             InitializeComponent();
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
             {
-                textboxTweet.Enabled = true;
                 tweeterLoginButton.Enabled = false;
             }));
         }
 
-        private void ClickButtonPublishTweet(object sender, EventArgs e)
+        private void ClickButtonPublishPost(object sender, EventArgs e)
         {
             try
             {
-                tweetPublisher.PublishTweet(textboxTweet.Text);
-                MessageBox.Show("Your tweet was successfully published!");
-                textboxTweet.Clear();
+                publishFacade.Publish(SocialNetwork.Tweeter, textboxTweet.Text, (delegate ()
+                {
+                    MessageBox.Show("Your tweet was successfully published!");
+                    textboxTweet.Clear();
+                }));
             }
             catch (ArgumentException ex)
             {
@@ -42,6 +43,10 @@ namespace NewsAggregator
             catch (Tweetinvi.Exceptions.TwitterException ex)
             {
                 Console.WriteLine("Something went wrong when we tried to execute the http request : '{0}'", ex.TwitterDescription);
+            }
+            catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
+            {
+                MessageBox.Show("You try to post without login. Please login first.");
             }
         }
 
@@ -52,12 +57,11 @@ namespace NewsAggregator
 
         private void UpdateButtonPublish()
         {
-            buttonPublishTweet.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
+            buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
         }
 
         private void OnFinish(Error error)
         {
-            textboxTweet.Enabled = true;
             tweeterLoginButton.Enabled = false;
         }
 
