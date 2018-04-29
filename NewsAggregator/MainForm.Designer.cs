@@ -54,7 +54,8 @@
             this.labelTweet.Text = "Write your tweet here:";
             // 
             // buttonPublishTweet
-            // 
+            //
+            this.buttonPublishPost.Enabled = false; 
             this.buttonPublishPost.Location = new System.Drawing.Point(236, 147);
             this.buttonPublishPost.Name = "buttonPublishTweet";
             this.buttonPublishPost.Size = new System.Drawing.Size(100, 23);
