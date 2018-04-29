@@ -22,7 +22,6 @@ namespace NewsAggregator
             InitializeComponent();
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
             {
-                textboxTweet.Enabled = true;
                 tweeterLoginButton.Enabled = false;
             }));
         }
@@ -45,6 +44,10 @@ namespace NewsAggregator
             {
                 Console.WriteLine("Something went wrong when we tried to execute the http request : '{0}'", ex.TwitterDescription);
             }
+            catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
+            {
+                MessageBox.Show("You try to post without login. Please login first.");
+            }
         }
 
         private void TextboxTweet_Changed(object sender, EventArgs e)
@@ -59,7 +62,6 @@ namespace NewsAggregator
 
         private void OnFinish(Error error)
         {
-            textboxTweet.Enabled = true;
             tweeterLoginButton.Enabled = false;
         }
 

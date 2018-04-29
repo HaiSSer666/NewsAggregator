@@ -9,6 +9,7 @@ namespace NewsAggregator
     public class LoginManagerFacade : ILoginManager
     {
         TweeterLoginManager tweeterLoginManager = new TweeterLoginManager();
+        public Dictionary<SocialNetwork, bool> loginInfo = new Dictionary<SocialNetwork, bool>();
 
         public void Login(SocialNetwork socialNetwork, LoginCallback loginCallback)
         {
@@ -33,6 +34,7 @@ namespace NewsAggregator
                 case SocialNetwork.Tweeter:
                     {
                         tweeterLoginManager.RestoreSession(restoreCallback);
+                        loginInfo.Add(SocialNetwork.Tweeter, true);
                         break;
                     }
                 case SocialNetwork.Facebook:

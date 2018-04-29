@@ -37,7 +37,6 @@
             // 
             // textboxTweet
             //
-            this.textboxTweet.Enabled = false; 
             this.textboxTweet.Location = new System.Drawing.Point(21, 61);
             this.textboxTweet.Name = "textboxTweet";
             this.textboxTweet.Size = new System.Drawing.Size(315, 75);
@@ -56,7 +55,6 @@
             // 
             // buttonPublishTweet
             // 
-            this.buttonPublishPost.Enabled = false;
             this.buttonPublishPost.Location = new System.Drawing.Point(236, 147);
             this.buttonPublishPost.Name = "buttonPublishTweet";
             this.buttonPublishPost.Size = new System.Drawing.Size(100, 23);
@@ -76,7 +74,6 @@
             // 
             // tweeterLoginButton
             // 
-            //this.tweeterLoginButton.Enabled = false;
             this.tweeterLoginButton.Location = new System.Drawing.Point(21, 147);
             this.tweeterLoginButton.Name = "tweeterLoginButton";
             this.tweeterLoginButton.Size = new System.Drawing.Size(100, 23);
