@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\LoginManagerFacade.cs" />
+    <Compile Include="Classes\PublishFacade.cs" />
     <Compile Include="Classes\SharedTypes.cs" />
     <Compile Include="Classes\TweeterLoginManager.cs" />
     <Compile Include="Error.cs" />
@@ -137,7 +138,7 @@
     <Compile Include="Interfaces\IPublishTweet.cs" />
     <Compile Include="Interfaces\ISerealizator.cs" />
     <Compile Include="Classes\Serealizator.cs" />
-    <Compile Include="Classes\TweetManager.cs" />
+    <Compile Include="Classes\TweeterPublishManager.cs" />
     <Compile Include="TweeterPinEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
