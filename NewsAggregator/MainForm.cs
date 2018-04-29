@@ -14,8 +14,8 @@ namespace NewsAggregator
 
     public partial class MainForm : Form
     {
-        private TweeterPublishManager tweetPublisher = new TweeterPublishManager();
         public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
+        public PublishFacade publishFacade = new PublishFacade();
 
         public MainForm()
         {     
@@ -27,13 +27,15 @@ namespace NewsAggregator
             }));
         }
 
-        private void ClickButtonPublishTweet(object sender, EventArgs e)
+        private void ClickButtonPublishPost(object sender, EventArgs e)
         {
             try
             {
-                tweetPublisher.PublishTweet(textboxTweet.Text);
-                MessageBox.Show("Your tweet was successfully published!");
-                textboxTweet.Clear();
+                publishFacade.Publish(SocialNetwork.Tweeter, textboxTweet.Text, (delegate ()
+                {
+                    MessageBox.Show("Your tweet was successfully published!");
+                    textboxTweet.Clear();
+                }));
             }
             catch (ArgumentException ex)
             {
@@ -52,7 +54,7 @@ namespace NewsAggregator
 
         private void UpdateButtonPublish()
         {
-            buttonPublishTweet.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
+            buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
         }
 
         private void OnFinish(Error error)
