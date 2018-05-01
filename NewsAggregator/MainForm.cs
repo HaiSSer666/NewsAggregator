@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NewsAggregator
@@ -20,6 +13,7 @@ namespace NewsAggregator
         public MainForm()
         {     
             InitializeComponent();
+
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
             {
                 tweeterLoginButton.Enabled = false;
@@ -68,6 +62,11 @@ namespace NewsAggregator
         private void tweeterLoginButton_Click(object sender, EventArgs e)
         {
             loginManagerFacade.Login(SocialNetwork.Tweeter, OnFinish);
+        }
+
+        private void facebookLoginButton_Click(object sender, EventArgs e)
+        {
+            loginManagerFacade.Login(SocialNetwork.Facebook, OnFinish);
         }
     }
 }
