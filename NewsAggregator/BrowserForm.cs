@@ -3,8 +3,12 @@ using System.Windows.Forms;
 
 namespace NewsAggregator
 {
+    public delegate void WebBrowserCallback(Uri uri);
+
     public partial class BrowserForm : Form
     {
+        public WebBrowserCallback webBrowserCallback;
+
         public BrowserForm(Uri uri)
         {
             InitializeComponent();
@@ -13,8 +17,7 @@ namespace NewsAggregator
 
         private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            Console.WriteLine(e.Url);
-            callback();
+            webBrowserCallback(e.Url);//FaceBookmanager.GetToken(e.Url)
         }
     }
 }

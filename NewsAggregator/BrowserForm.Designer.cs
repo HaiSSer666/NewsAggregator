@@ -50,7 +50,6 @@
             this.Name = "BrowserForm";
             this.Text = "BrowserForm";
             this.ResumeLayout(false);
-
         }
 
         #endregion

@@ -54,19 +54,20 @@ namespace NewsAggregator
             buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
         }
 
-        private void OnFinish(Error error)
-        {
-            tweeterLoginButton.Enabled = false;
-        }
-
         private void tweeterLoginButton_Click(object sender, EventArgs e)
         {
-            loginManagerFacade.Login(SocialNetwork.Tweeter, OnFinish);
+            loginManagerFacade.Login(SocialNetwork.Tweeter, (delegate (Error error)
+            {
+                tweeterLoginButton.Enabled = false;
+            }));
         }
 
         private void facebookLoginButton_Click(object sender, EventArgs e)
         {
-            loginManagerFacade.Login(SocialNetwork.Facebook, OnFinish);
+            loginManagerFacade.Login(SocialNetwork.Facebook, (delegate (Error error)
+            {
+                facebookLoginButton.Enabled = false;
+            }));
         }
     }
 }
