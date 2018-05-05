@@ -10,9 +10,9 @@ namespace NewsAggregator
     {
         public string domain;
         public int code;
-        public Dictionary<string, object> info;
+        public Dictionary<Type, string> info;
 
-        public Error(string domain, int code, Dictionary<string, object> info)
+        public Error(string domain, int code, Dictionary<Type, string> info)
         {
             this.domain = domain;
             this.code = code;
