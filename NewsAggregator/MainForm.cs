@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace NewsAggregator
 {
     public delegate void TweetTextCallback(string tweetText);
-
+    public delegate void UpdateUI();
     public partial class MainForm : Form
     {
         public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
@@ -22,36 +22,18 @@ namespace NewsAggregator
 
         private void ClickButtonPublishPost(object sender, EventArgs e)
         {
-            try
-            {
-                publishFacade.Publish(SocialNetwork.Tweeter, textboxTweet.Text, (delegate ()
+                publishFacade.Publish(SocialNetwork.Tweeter, textboxTweet.Text, (delegate (Error error)
                 {
+                    error = null;
                     MessageBox.Show("Your tweet was successfully published!");
                     textboxTweet.Clear();
                 }));
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine("Request parameters are invalid: '{0}'", ex.Message);
-            }
-            catch (Tweetinvi.Exceptions.TwitterException ex)
-            {
-                Console.WriteLine("Something went wrong when we tried to execute the http request : '{0}'", ex.TwitterDescription);
-            }
-            catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
-            {
-                MessageBox.Show("You try to post without login. Please login first.");
-            }
         }
 
         private void TextboxTweet_Changed(object sender, EventArgs e)
         {
-            UpdateButtonPublish();
-        }
-
-        private void UpdateButtonPublish()
-        {
-            buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
+            UpdateUI updateButtonPublish = () => buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
+            updateButtonPublish(); 
         }
 
         private void tweeterLoginButton_Click(object sender, EventArgs e)
