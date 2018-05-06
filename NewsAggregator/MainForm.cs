@@ -40,7 +40,7 @@ namespace NewsAggregator
 
         private void TextboxTweet_Changed(object sender, EventArgs e)
         {
-            UpdateUI updateButtonPublish = () => buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 40;
+            UpdateUI updateButtonPublish = () => buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
             updateButtonPublish(); 
         }
 
