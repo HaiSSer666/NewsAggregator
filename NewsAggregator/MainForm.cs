@@ -1,69 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NewsAggregator
 {
     public delegate void TweetTextCallback(string tweetText);
-
+    public delegate void UpdateUI();
     public partial class MainForm : Form
     {
-        private TweetManager tweetPublisher = new TweetManager();
-        public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
+        public LoginManagerFacade loginManagerFacade);
+        public PublishFacade publishFacade;
 
-        public MainForm()
+        public MainForm(LoginManagerFacade loginManagerFacade, PublishFacade publishFacade)
         {     
             InitializeComponent();
+            this.loginManagerFacade = loginManagerFacade;
+            this.publishFacade = publishFacade;
+
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
             {
-                textboxTweet.Enabled = true;
                 tweeterLoginButton.Enabled = false;
             }));
         }
 
-        private void ClickButtonPublishTweet(object sender, EventArgs e)
+        private void ClickButtonPublishPost(object sender, EventArgs e)
         {
-            try
-            {
-                tweetPublisher.PublishTweet(textboxTweet.Text);
-                MessageBox.Show("Your tweet was successfully published!");
-                textboxTweet.Clear();
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine("Request parameters are invalid: '{0}'", ex.Message);
-            }
-            catch (Tweetinvi.Exceptions.TwitterException ex)
-            {
-                Console.WriteLine("Something went wrong when we tried to execute the http request : '{0}'", ex.TwitterDescription);
-            }
+                publishFacade.Publish(SocialNetwork.Tweeter, textboxTweet.Text, (delegate (Error error)
+                {
+                    if(error!=null)
+                    {
+                        MessageBox.Show(error.errorDescription);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your tweet was successfully published!");
+                        textboxTweet.Clear();
+                    }   
+                }));
         }
 
         private void TextboxTweet_Changed(object sender, EventArgs e)
         {
-            UpdateButtonPublish();
-        }
-
-        private void UpdateButtonPublish()
-        {
-            buttonPublishTweet.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
-        }
-
-        private void OnFinish(Error error)
-        {
-            textboxTweet.Enabled = true;
-            tweeterLoginButton.Enabled = false;
+            UpdateUI updateButtonPublish = () => buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
+            updateButtonPublish(); 
         }
 
         private void tweeterLoginButton_Click(object sender, EventArgs e)
         {
-            loginManagerFacade.Login(SocialNetwork.Tweeter, OnFinish);
+            loginManagerFacade.Login(SocialNetwork.Tweeter, (delegate (Error error)
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error.errorDescription);
+                }
+                else
+                {
+                    tweeterLoginButton.Enabled = false;
+                }
+            }));
+        }
+
+        private void facebookLoginButton_Click(object sender, EventArgs e)
+        {
+            loginManagerFacade.Login(SocialNetwork.Facebook, (delegate (Error error)
+            {
+                if (error != null)
+                {
+                    MessageBox.Show(error.errorDescription);
+                }
+                else
+                {
+                    facebookLoginButton.Enabled = false;
+                }
+            }));
         }
     }
 }

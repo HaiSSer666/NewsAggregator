@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NewsAggregator
 {
     public class LoginManagerFacade : ILoginManager
     {
         TweeterLoginManager tweeterLoginManager = new TweeterLoginManager();
+        FacebookLoginManager facebookLoginManager = new FacebookLoginManager();
+        public Dictionary<SocialNetwork, bool> loginInfo = new Dictionary<SocialNetwork, bool>();
 
         public void Login(SocialNetwork socialNetwork, LoginCallback loginCallback)
         {
@@ -21,6 +19,7 @@ namespace NewsAggregator
                     }
                 case SocialNetwork.Facebook:
                     {
+                        facebookLoginManager.Login(loginCallback);
                         break;
                     } 
             }
@@ -33,6 +32,7 @@ namespace NewsAggregator
                 case SocialNetwork.Tweeter:
                     {
                         tweeterLoginManager.RestoreSession(restoreCallback);
+                        loginInfo.Add(SocialNetwork.Tweeter, true);
                         break;
                     }
                 case SocialNetwork.Facebook:

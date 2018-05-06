@@ -8,15 +8,15 @@ namespace NewsAggregator
 {
     public class Error
     {
+        public string errorDescription;
         public string domain;
         public int code;
-        public Dictionary<string, object> info;
 
-        public Error(string domain, int code, Dictionary<string, object> info)
+        public Error(string domain, int code, string errorDescription)
         {
             this.domain = domain;
             this.code = code;
-            this.info = info;
+            this.errorDescription = errorDescription;
         }
     }
 }

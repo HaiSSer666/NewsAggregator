@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsAggregator
 {
@@ -14,7 +10,7 @@ namespace NewsAggregator
         public void Serialize(object serializable, string pathToFile)
         {
             IFormatter formatter = new BinaryFormatter();
-            System.IO.Stream stream = new FileStream(pathToFile,
+            Stream stream = new FileStream(pathToFile,
                          FileMode.OpenOrCreate,
                          FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, serializable);
@@ -26,7 +22,7 @@ namespace NewsAggregator
             try
             {
                 IFormatter formatter = new BinaryFormatter();
-                System.IO.Stream stream = new FileStream(pathToFile,
+                Stream stream = new FileStream(pathToFile,
                                       FileMode.Open,
                                       FileAccess.Read,
                                       FileShare.Read);
