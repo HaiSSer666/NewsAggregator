@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Tweetinvi;
 
 namespace NewsAggregator
@@ -15,24 +14,15 @@ namespace NewsAggregator
             }
             catch (ArgumentException ex)
             {
-                publishCallback(new Error("TweeterErrorDomain", 1, new Dictionary<Type, string>
-                {
-                    {ex.GetType(), ex.StackTrace}
-                }));
+                publishCallback(new Error("TweeterErrorDomain", 1, "You entred invalid text"));
             }
             catch (Tweetinvi.Exceptions.TwitterException ex)
             {
-                publishCallback(new Error("TweeterErrorDomain", 2, new Dictionary<Type, string>
-                {
-                    {ex.GetType(), ex.StackTrace}
-                }));
+                publishCallback(new Error("TweeterErrorDomain", 2, "Something went wrong"));
             }
             catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
             {
-                publishCallback(new Error("TweeterErrorDomain", 3, new Dictionary<Type, string>
-                {
-                    {ex.GetType(), ex.StackTrace}
-                }));
+                publishCallback(new Error("TweeterErrorDomain", 3, "You are not logged in to perform this action"));
             }
         }
     }

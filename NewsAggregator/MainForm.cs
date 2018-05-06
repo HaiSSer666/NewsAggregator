@@ -7,12 +7,14 @@ namespace NewsAggregator
     public delegate void UpdateUI();
     public partial class MainForm : Form
     {
-        public LoginManagerFacade loginManagerFacade = new LoginManagerFacade();
-        public PublishFacade publishFacade = new PublishFacade();
+        public LoginManagerFacade loginManagerFacade);
+        public PublishFacade publishFacade;
 
-        public MainForm()
+        public MainForm(LoginManagerFacade loginManagerFacade, PublishFacade publishFacade)
         {     
             InitializeComponent();
+            this.loginManagerFacade = loginManagerFacade;
+            this.publishFacade = publishFacade;
 
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
             {
@@ -24,15 +26,21 @@ namespace NewsAggregator
         {
                 publishFacade.Publish(SocialNetwork.Tweeter, textboxTweet.Text, (delegate (Error error)
                 {
-                    error = null;
-                    MessageBox.Show("Your tweet was successfully published!");
-                    textboxTweet.Clear();
+                    if(error!=null)
+                    {
+                        MessageBox.Show(error.errorDescription);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your tweet was successfully published!");
+                        textboxTweet.Clear();
+                    }   
                 }));
         }
 
         private void TextboxTweet_Changed(object sender, EventArgs e)
         {
-            UpdateUI updateButtonPublish = () => buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 140;
+            UpdateUI updateButtonPublish = () => buttonPublishPost.Enabled = textboxTweet.Text.Trim() != string.Empty && textboxTweet.Text.Trim().Length <= 40;
             updateButtonPublish(); 
         }
 
@@ -40,7 +48,14 @@ namespace NewsAggregator
         {
             loginManagerFacade.Login(SocialNetwork.Tweeter, (delegate (Error error)
             {
-                tweeterLoginButton.Enabled = false;
+                if (error != null)
+                {
+                    MessageBox.Show(error.errorDescription);
+                }
+                else
+                {
+                    tweeterLoginButton.Enabled = false;
+                }
             }));
         }
 
@@ -48,7 +63,14 @@ namespace NewsAggregator
         {
             loginManagerFacade.Login(SocialNetwork.Facebook, (delegate (Error error)
             {
-                facebookLoginButton.Enabled = false;
+                if (error != null)
+                {
+                    MessageBox.Show(error.errorDescription);
+                }
+                else
+                {
+                    facebookLoginButton.Enabled = false;
+                }
             }));
         }
     }

@@ -41,7 +41,7 @@ namespace NewsAggregator
             }
             else
             {
-                this.loginCallback(new Error("", 0, null));
+                this.loginCallback(new Error("TweeterErrorDomain", 0, "Failed to login to Tweeter"));
             }
         }
 
