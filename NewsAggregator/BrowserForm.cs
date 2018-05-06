@@ -17,7 +17,7 @@ namespace NewsAggregator
 
         private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            webBrowserCallback(e.Url);//FaceBookmanager.GetToken(e.Url)
+            webBrowserCallback(e.Url);
         }
     }
 }

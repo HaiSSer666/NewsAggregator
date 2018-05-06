@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NewsAggregator
@@ -24,7 +17,7 @@ namespace NewsAggregator
 
         private void ClickLoginButton(object sender, EventArgs e)
         {
-            pinCallback(textfieldPIN.Text); //LoginWithPIN(textfield.Text)
+            pinCallback(textfieldPIN.Text);
         }
 
         private void TextfieldPIN_Changed(object sender, EventArgs e)
