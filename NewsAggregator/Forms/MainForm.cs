@@ -5,11 +5,12 @@ namespace NewsAggregator
 {
     public delegate void TweetTextCallback(string tweetText);
     public delegate void UpdateUI();
+
     public partial class MainForm : Form
     {
-        public LoginManagerFacade loginManagerFacade);
+        public LoginManagerFacade loginManagerFacade;
         public PublishFacade publishFacade;
-
+    
         public MainForm(LoginManagerFacade loginManagerFacade, PublishFacade publishFacade)
         {     
             InitializeComponent();
@@ -54,6 +55,7 @@ namespace NewsAggregator
                 }
                 else
                 {
+                    MessageBox.Show("You are logged in Tweeter. Graz, pidor");
                     tweeterLoginButton.Enabled = false;
                 }
             }));
@@ -69,6 +71,7 @@ namespace NewsAggregator
                 }
                 else
                 {
+                    MessageBox.Show("You are logged in FB. Graz, pidor");
                     facebookLoginButton.Enabled = false;
                 }
             }));

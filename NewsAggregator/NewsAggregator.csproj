@@ -12,7 +12,8 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -136,45 +139,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrowserForm.cs">
+    <Compile Include="Forms\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrowserForm.Designer.cs">
+    <Compile Include="Forms\BrowserForm.Designer.cs">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\FacebookLoginManager.cs" />
     <Compile Include="Classes\LoginManagerFacade.cs" />
     <Compile Include="Classes\PublishFacade.cs" />
+    <Compile Include="Classes\Users\FacebookUser.cs" />
     <Compile Include="Classes\SharedTypes.cs" />
+    <Compile Include="Classes\Storages\SyncStorage.cs" />
     <Compile Include="Classes\TweeterLoginManager.cs" />
+    <Compile Include="Classes\Users\TweeterUser.cs" />
+    <Compile Include="Classes\Users\User.cs" />
+    <Compile Include="Classes\Storages\UserStorage.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Interfaces\ILoginManager.cs" />
     <Compile Include="Interfaces\IPublishTweet.cs" />
     <Compile Include="Interfaces\ISerealizator.cs" />
     <Compile Include="Classes\Serealizator.cs" />
     <Compile Include="Classes\TweeterPublishManager.cs" />
-    <Compile Include="TweeterPinEntryForm.cs">
+    <Compile Include="Interfaces\IStorage.cs" />
+    <Compile Include="Forms\TweeterPinEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TweeterPinEntryForm.Designer.cs">
+    <Compile Include="Forms\TweeterPinEntryForm.Designer.cs">
       <DependentUpon>TweeterPinEntryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\UserCredentials.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BrowserForm.resx">
+    <EmbeddedResource Include="Forms\BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TweeterPinEntryForm.resx">
+    <EmbeddedResource Include="Forms\TweeterPinEntryForm.resx">
       <DependentUpon>TweeterPinEntryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
