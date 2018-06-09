@@ -1,4 +1,5 @@
-﻿using Tweetinvi;
+﻿using System;
+using Tweetinvi;
 using Tweetinvi.Models;
 
 namespace NewsAggregator
@@ -14,6 +15,9 @@ namespace NewsAggregator
         private const string CONSUMER_KEY = "YtCb9DV9tiVk143hwd8WxkvJx";
         private const string CONSUMER_SECRET = "8aSPJYvRT8djByuofStlwd1jL9TJwoMekhKCOybBsmZ8ld3qOJ";
         private const string PATH_TO_CREDENTIALS = "UserCredentials.bin";
+
+        public IAuthenticatedUser authenticatedUser;
+        public TweeterUser tweeterUser = new TweeterUser();
 
         public TweeterLoginManager()
         {
@@ -33,10 +37,15 @@ namespace NewsAggregator
             tweeterPinEntryForm.Close();
             var userCredentials = AuthFlow.CreateCredentialsFromVerifierCode(PIN, this.authenticationContext);
             Auth.SetCredentials(userCredentials);
-            if (User.GetAuthenticatedUser() != null)
+            if (Tweetinvi.User.GetAuthenticatedUser() != null)
             {
+                //TODO
+                authenticatedUser = Tweetinvi.User.GetAuthenticatedUser();
                 UserCredentials credentialsToStore = new UserCredentials(userCredentials.AccessToken, userCredentials.AccessTokenSecret);
                 serealizator.Serialize(credentialsToStore, PATH_TO_CREDENTIALS);
+                //TODO
+                FillTweeterUserInfo();
+                MergeUserData();
                 this.loginCallback(null);
             }
             else
@@ -53,6 +62,10 @@ namespace NewsAggregator
                 this.appCredentials.AccessToken = userCredentials.userAccessToken;
                 this.appCredentials.AccessTokenSecret = userCredentials.userAccessSecret;
                 Auth.SetCredentials(this.appCredentials);
+                //TODO
+                authenticatedUser = Tweetinvi.User.GetAuthenticatedUser();
+                FillTweeterUserInfo();
+                MergeUserData();
                 restoreCallback();
             }
         }
@@ -61,6 +74,23 @@ namespace NewsAggregator
         {
             authenticationContext = AuthFlow.InitAuthentication(this.appCredentials);
             System.Diagnostics.Process.Start(authenticationContext.AuthorizationURL);
-        }   
+        }
+
+        //TODO
+        public void FillTweeterUserInfo()
+        {
+            tweeterUser.firstName = authenticatedUser.Name;
+            tweeterUser.email = authenticatedUser.Email;
+            tweeterUser.id = authenticatedUser.Id.ToString();
+        }
+
+        //TODO
+        public async void MergeUserData()
+        {
+            UserStorage userStorage = UserStorage.Storage();
+            User user = await userStorage.GetAsync();
+            user.firstName = tweeterUser.firstName;
+            await userStorage.SetAsync(user);
+        }
     }
 }
