@@ -23,11 +23,16 @@ namespace NewsAggregator
 
         override protected User GetSync()
         {
+            System.Threading.Thread.Sleep(5000);
+            Console.WriteLine("Got user");
             return user;
+
         }
 
         override protected  void SetSync(User user)
         {
+            System.Threading.Thread.Sleep(5000);
+            Console.WriteLine("Set user");
             this.user = user;
         }
     }

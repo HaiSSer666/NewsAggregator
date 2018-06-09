@@ -10,13 +10,19 @@ namespace NewsAggregator
     {
         public async Task<T> GetAsync()
         {
-            return await Task.FromResult<T>(GetSync());
+            
+            return await Task.Run(() =>
+            {
+                return GetSync();
+            });
         }
 
         public async Task SetAsync(T obj)
         {
-            SetSync(obj);
-            await Task.CompletedTask;
+            await Task.Run(() =>
+            {
+                SetSync(obj);
+            });
         }
 
         protected virtual T GetSync()
@@ -29,6 +35,4 @@ namespace NewsAggregator
             throw new NotImplementedException();
         }
     }
-
-
 }
