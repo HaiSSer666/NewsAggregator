@@ -10,7 +10,6 @@ namespace NewsAggregator
     {
         public async Task<T> GetAsync()
         {
-            
             return await Task.Run(() =>
             {
                 return GetSync();

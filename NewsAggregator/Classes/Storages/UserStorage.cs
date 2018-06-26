@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator
 {
-    class UserStorage : SyncStorage<User>
+    class UserStorage : ObservableStorage<User>
     {
         private User user = new User();
         private static UserStorage instance;
-
-        private UserStorage()
-        { }
 
         public static UserStorage Storage()
         {
@@ -23,17 +20,13 @@ namespace NewsAggregator
 
         override protected User GetSync()
         {
-            System.Threading.Thread.Sleep(5000);
-            Console.WriteLine("Got user");
             return user;
-
         }
 
-        override protected  void SetSync(User user)
+        override protected void SetSync(User user)
         {
-            System.Threading.Thread.Sleep(5000);
-            Console.WriteLine("Set user");
             this.user = user;
+            this.NotifyObservers(user);
         }
     }
 }

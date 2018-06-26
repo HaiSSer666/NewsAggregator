@@ -139,6 +139,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Storages\ObservableStorage.cs" />
+    <Compile Include="Classes\Storages\TokenStorage.cs" />
     <Compile Include="Forms\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +159,7 @@
     <Compile Include="Classes\Storages\UserStorage.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Interfaces\ILoginManager.cs" />
+    <Compile Include="Interfaces\IObservable.cs" />
     <Compile Include="Interfaces\IPublishTweet.cs" />
     <Compile Include="Interfaces\ISerealizator.cs" />
     <Compile Include="Classes\Serealizator.cs" />
