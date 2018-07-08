@@ -11,7 +11,7 @@ namespace NewsAggregator
 {
     class TweeterFeedManager
     {
-        public async Task<List<IFeedItem>> GetFeed(int maximumTweets, FeedCallback feedCallback)
+        public async Task<SortedSet<IFeedItem>> GetFeed(int maximumTweets, FeedCallback feedCallback)
         {
             try
             {
@@ -36,14 +36,13 @@ namespace NewsAggregator
         public async Task RestoreTweeterFeed()
         {
             FeedStorage feedStorage = FeedStorage.Storage();
-            List<IFeedItem> feedItems = await feedStorage.GetAsync();
+            SortedSet<IFeedItem> feedItems = await feedStorage.GetAsync();
         }
 
-        public async Task<List<IFeedItem>> SaveTweetsToStorage(IEnumerable<ITweet> tweets)
+        public async Task<SortedSet<IFeedItem>> SaveTweetsToStorage(IEnumerable<ITweet> tweets)
         {
             FeedStorage feedStorage = FeedStorage.Storage();
-            List<IFeedItem> feedItems = await feedStorage.GetAsync();
-            feedItems.Clear();
+            SortedSet<IFeedItem> feedItems = await feedStorage.GetAsync();
             foreach(ITweet tweet in tweets)
             {
                 feedItems.Add(new TweeterFeedItem(

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator
 {
-    class FeedStorage : ObservableStorage<List<IFeedItem>>
+    class FeedStorage : ObservableStorage<SortedSet<IFeedItem>>
     {
-        public List<IFeedItem> feedItems = new List<IFeedItem>();
+        public SortedSet<IFeedItem> feedItems = new SortedSet<IFeedItem>();
         Serealizator serealizator = new Serealizator();
         private const string PATH_TO_FEED = "NewsFeed.bin";
         private static FeedStorage instance;
@@ -20,9 +20,9 @@ namespace NewsAggregator
             return instance;
         }
 
-        override protected List<IFeedItem> GetSync()
+        override protected SortedSet<IFeedItem> GetSync()
         {
-            List<IFeedItem> restoredFeedItems = (List<IFeedItem>)serealizator.Deserialize(PATH_TO_FEED);
+            SortedSet<IFeedItem> restoredFeedItems = (SortedSet<IFeedItem>)serealizator.Deserialize(PATH_TO_FEED);
             if(restoredFeedItems != null)
             {
                 SetSync(restoredFeedItems);
@@ -34,7 +34,7 @@ namespace NewsAggregator
             }
         }
 
-        override protected void SetSync(List<IFeedItem> feedItems)
+        override protected void SetSync(SortedSet<IFeedItem> feedItems)
         {
             serealizator.Serialize(feedItems, PATH_TO_FEED);
             this.feedItems = feedItems;

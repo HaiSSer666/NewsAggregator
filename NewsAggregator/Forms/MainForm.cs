@@ -29,7 +29,7 @@ namespace NewsAggregator
                 //on user info is updated
                 //textboxTweet.Invoke(new Action(() => textboxTweet.Text = user.firstName));
             });
-            FeedStorage.Storage().AddObserver(this, (List<IFeedItem> feedItems) =>
+            FeedStorage.Storage().AddObserver(this, (SortedSet<IFeedItem> feedItems) =>
             {
                 textBoxFeed.Invoke(new Action(() => textBoxFeed.Text = UnpackTweets(feedItems)));
             });
@@ -98,7 +98,7 @@ namespace NewsAggregator
         {
             this.Enabled = false;
             textBoxFeed.Clear();
-            List <IFeedItem> feedItems = await feedFacade.GetFeed(SocialNetwork.Tweeter, MAXIMUN_TWEETS, (delegate (Error error)
+            SortedSet<IFeedItem> feedItems = await feedFacade.GetFeed(SocialNetwork.Tweeter, MAXIMUN_TWEETS, (delegate (Error error)
             {
                 if (error != null)
                 {
@@ -113,7 +113,7 @@ namespace NewsAggregator
             textBoxFeed.Text = UnpackTweets(feedItems);
         }
 
-        private string UnpackTweets(List<IFeedItem> feedItems)
+        private string UnpackTweets(SortedSet<IFeedItem> feedItems)
         {
             string feed = String.Empty;
             foreach (IFeedItem tweet in feedItems)

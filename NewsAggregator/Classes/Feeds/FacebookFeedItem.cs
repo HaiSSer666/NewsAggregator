@@ -55,5 +55,15 @@ namespace NewsAggregator
                 fullText = value;
             }
         }
+
+        public int CompareTo(IFeedItem other)
+        {
+            if (this.CreatedAt > other.CreatedAt)
+                return 1;
+            if (this.CreatedAt < other.CreatedAt)
+                return -1;
+            else
+                return 0;
+        }
     }
 }

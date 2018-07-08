@@ -8,7 +8,7 @@ using Tweetinvi.Models.Entities;
 
 namespace NewsAggregator
 {
-    public interface IFeedItem
+    public interface IFeedItem : IComparable<IFeedItem>
     {
         DateTime CreatedAt { get; set; }
         string CreatedBy { get; set; }

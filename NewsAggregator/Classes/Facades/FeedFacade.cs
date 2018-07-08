@@ -10,7 +10,7 @@ namespace NewsAggregator
     {
         TweeterFeedManager tweeterFeedManager = new TweeterFeedManager();
 
-        public async Task<List<IFeedItem>> GetFeed(SocialNetwork socialNetwork, int maximumTweets, FeedCallback feedCallback)
+        public async Task<SortedSet<IFeedItem>> GetFeed(SocialNetwork socialNetwork, int maximumTweets, FeedCallback feedCallback)
         {
             switch (socialNetwork)
             {
