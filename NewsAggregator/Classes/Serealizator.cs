@@ -26,12 +26,18 @@ namespace NewsAggregator
                                       FileMode.Open,
                                       FileAccess.Read,
                                       FileShare.Read);
-                UserCredentials userCredentials = (UserCredentials)formatter.Deserialize(stream);
+                object deserializedObject = formatter.Deserialize(stream);
                 stream.Close();
-                return userCredentials;
+                return deserializedObject;
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
+                Console.WriteLine("Could not find " + ex.FileName);
+                return null;
+            }
+            catch (SerializationException ex)
+            {
+                Console.WriteLine("Something went wrong " + ex.Message);
                 return null;
             }
         }

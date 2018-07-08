@@ -17,7 +17,7 @@ namespace NewsAggregator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(new LoginManagerFacade(), new PublishFacade()));
+            Application.Run(new MainForm(new LoginManagerFacade(), new PublishFacade(), new FeedFacade()));
         }
     }
 }

@@ -34,11 +34,14 @@
             this.labelWelcomeMessage = new System.Windows.Forms.Label();
             this.tweeterLoginButton = new System.Windows.Forms.Button();
             this.facebookLoginButton = new System.Windows.Forms.Button();
+            this.labelFeed = new System.Windows.Forms.Label();
+            this.buttonUpdateTweeterFeed = new System.Windows.Forms.Button();
+            this.textBoxFeed = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // textboxTweet
             // 
-            this.textboxTweet.Location = new System.Drawing.Point(21, 61);
+            this.textboxTweet.Location = new System.Drawing.Point(21, 65);
             this.textboxTweet.Name = "textboxTweet";
             this.textboxTweet.Size = new System.Drawing.Size(315, 75);
             this.textboxTweet.TabIndex = 4;
@@ -57,9 +60,9 @@
             // buttonPublishPost
             // 
             this.buttonPublishPost.Enabled = false;
-            this.buttonPublishPost.Location = new System.Drawing.Point(236, 147);
+            this.buttonPublishPost.Location = new System.Drawing.Point(228, 146);
             this.buttonPublishPost.Name = "buttonPublishPost";
-            this.buttonPublishPost.Size = new System.Drawing.Size(100, 23);
+            this.buttonPublishPost.Size = new System.Drawing.Size(108, 23);
             this.buttonPublishPost.TabIndex = 7;
             this.buttonPublishPost.Text = "Publish tweet";
             this.buttonPublishPost.UseVisualStyleBackColor = true;
@@ -76,29 +79,60 @@
             // 
             // tweeterLoginButton
             // 
-            this.tweeterLoginButton.Location = new System.Drawing.Point(21, 147);
+            this.tweeterLoginButton.Location = new System.Drawing.Point(343, 30);
             this.tweeterLoginButton.Name = "tweeterLoginButton";
             this.tweeterLoginButton.Size = new System.Drawing.Size(108, 23);
             this.tweeterLoginButton.TabIndex = 8;
             this.tweeterLoginButton.Text = "Login to Tweeter";
             this.tweeterLoginButton.UseVisualStyleBackColor = true;
-            this.tweeterLoginButton.Click += new System.EventHandler(this.tweeterLoginButton_Click);
+            this.tweeterLoginButton.Click += new System.EventHandler(this.TweeterLoginButton_Click);
             // 
             // facebookLoginButton
             // 
-            this.facebookLoginButton.Location = new System.Drawing.Point(21, 177);
+            this.facebookLoginButton.Location = new System.Drawing.Point(343, 4);
             this.facebookLoginButton.Name = "facebookLoginButton";
             this.facebookLoginButton.Size = new System.Drawing.Size(108, 23);
             this.facebookLoginButton.TabIndex = 10;
             this.facebookLoginButton.Text = "Login to Facebook";
             this.facebookLoginButton.UseVisualStyleBackColor = true;
-            this.facebookLoginButton.Click += new System.EventHandler(this.facebookLoginButton_Click);
+            this.facebookLoginButton.Click += new System.EventHandler(this.FacebookLoginButton_Click);
+            // 
+            // labelFeed
+            // 
+            this.labelFeed.AutoSize = true;
+            this.labelFeed.Location = new System.Drawing.Point(18, 189);
+            this.labelFeed.Name = "labelFeed";
+            this.labelFeed.Size = new System.Drawing.Size(118, 13);
+            this.labelFeed.TabIndex = 12;
+            this.labelFeed.Text = "Here are you last news!";
+            // 
+            // buttonUpdateTweeterFeed
+            // 
+            this.buttonUpdateTweeterFeed.Location = new System.Drawing.Point(228, 453);
+            this.buttonUpdateTweeterFeed.Name = "buttonUpdateTweeterFeed";
+            this.buttonUpdateTweeterFeed.Size = new System.Drawing.Size(108, 23);
+            this.buttonUpdateTweeterFeed.TabIndex = 13;
+            this.buttonUpdateTweeterFeed.Text = "Update Tweeter Feed";
+            this.buttonUpdateTweeterFeed.UseVisualStyleBackColor = true;
+            this.buttonUpdateTweeterFeed.Click += new System.EventHandler(this.ButtonUpdateTweeterFeed_Click);
+            // 
+            // textBoxFeed
+            // 
+            this.textBoxFeed.Location = new System.Drawing.Point(21, 207);
+            this.textBoxFeed.Name = "textBoxFeed";
+            this.textBoxFeed.ReadOnly = true;
+            this.textBoxFeed.Size = new System.Drawing.Size(315, 240);
+            this.textBoxFeed.TabIndex = 14;
+            this.textBoxFeed.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 211);
+            this.ClientSize = new System.Drawing.Size(458, 485);
+            this.Controls.Add(this.textBoxFeed);
+            this.Controls.Add(this.buttonUpdateTweeterFeed);
+            this.Controls.Add(this.labelFeed);
             this.Controls.Add(this.facebookLoginButton);
             this.Controls.Add(this.tweeterLoginButton);
             this.Controls.Add(this.buttonPublishPost);
@@ -119,5 +153,8 @@
         public System.Windows.Forms.Label labelWelcomeMessage;
         private System.Windows.Forms.Button tweeterLoginButton;
         private System.Windows.Forms.Button facebookLoginButton;
+        private System.Windows.Forms.Label labelFeed;
+        private System.Windows.Forms.Button buttonUpdateTweeterFeed;
+        private System.Windows.Forms.RichTextBox textBoxFeed;
     }
 }

@@ -139,31 +139,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Facades\FeedFacade.cs" />
+    <Compile Include="Classes\Feeds\FacebookFeedItem.cs" />
+    <Compile Include="Classes\Feeds\TweeterFeedItem.cs" />
+    <Compile Include="Classes\Storages\FeedStorage.cs" />
     <Compile Include="Classes\Storages\ObservableStorage.cs" />
     <Compile Include="Classes\Storages\TokenStorage.cs" />
+    <Compile Include="Classes\Managers\TweeterFeedManager.cs" />
     <Compile Include="Forms\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\BrowserForm.Designer.cs">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\FacebookLoginManager.cs" />
-    <Compile Include="Classes\LoginManagerFacade.cs" />
-    <Compile Include="Classes\PublishFacade.cs" />
+    <Compile Include="Classes\Managers\FacebookLoginManager.cs" />
+    <Compile Include="Classes\Facades\LoginManagerFacade.cs" />
+    <Compile Include="Classes\Facades\PublishFacade.cs" />
     <Compile Include="Classes\Users\FacebookUser.cs" />
     <Compile Include="Classes\SharedTypes.cs" />
     <Compile Include="Classes\Storages\SyncStorage.cs" />
-    <Compile Include="Classes\TweeterLoginManager.cs" />
+    <Compile Include="Classes\Managers\TweeterLoginManager.cs" />
     <Compile Include="Classes\Users\TweeterUser.cs" />
     <Compile Include="Classes\Users\User.cs" />
     <Compile Include="Classes\Storages\UserStorage.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="Interfaces\IFeedItem.cs" />
     <Compile Include="Interfaces\ILoginManager.cs" />
     <Compile Include="Interfaces\IObservable.cs" />
     <Compile Include="Interfaces\IPublishTweet.cs" />
     <Compile Include="Interfaces\ISerealizator.cs" />
     <Compile Include="Classes\Serealizator.cs" />
-    <Compile Include="Classes\TweeterPublishManager.cs" />
+    <Compile Include="Classes\Managers\TweeterPublishManager.cs" />
     <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Forms\TweeterPinEntryForm.cs">
       <SubType>Form</SubType>
