@@ -9,6 +9,7 @@ namespace NewsAggregator
         private LoginCallback loginCallback;
         private Serealizator serealizator = new Serealizator();
         private TweeterPinEntryForm tweeterPinEntryForm = new TweeterPinEntryForm();
+        private TweeterFeedManager tweeterFeedManager = new TweeterFeedManager();
         private ITwitterCredentials appCredentials { get; set; }
         private IAuthenticationContext authenticationContext { get; set; }
 
@@ -54,7 +55,7 @@ namespace NewsAggregator
             }
         }
 
-        public void RestoreSession(RestoreCallback restoreCallback)
+        public async void RestoreSession(RestoreCallback restoreCallback)
         {
             UserCredentials userCredentials = (UserCredentials)serealizator.Deserialize(PATH_TO_CREDENTIALS);
             if (userCredentials != null)
@@ -62,6 +63,7 @@ namespace NewsAggregator
                 this.appCredentials.AccessToken = userCredentials.userAccessToken;
                 this.appCredentials.AccessTokenSecret = userCredentials.userAccessSecret;
                 Auth.SetCredentials(this.appCredentials);
+                await tweeterFeedManager.RestoreTweeterFeed();
                 //TODO
                 authenticatedUser = Tweetinvi.User.GetAuthenticatedUser();
                 FillTweeterUserInfo();

@@ -39,7 +39,6 @@ namespace NewsAggregator
             loginParameters.Add("client_secret", CLIENT_SECRET);
             loginParameters.Add("response_type", REDIRECT_TYPE);
             loginParameters.Add("redirect_uri", REDIRECT_URL);
-            //loginParameters.Add("scope", "offline_access"); 
             return fbClient.GetLoginUrl(loginParameters);
         }
 
@@ -57,7 +56,6 @@ namespace NewsAggregator
                 if(parsedToken!=null && parsedToken.Length > 0)
                 {
                     fbClient.AccessToken = parsedToken;
-                    
                     GetUserInfo("/me");
                 }
                 else
