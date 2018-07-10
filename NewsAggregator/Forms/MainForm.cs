@@ -27,11 +27,12 @@ namespace NewsAggregator
             UserStorage.Storage().AddObserver(this, (User user) =>
             {
                 //on user info is updated
-                //textboxTweet.Invoke(new Action(() => textboxTweet.Text = user.firstName));
+                //textboxTweet.BeginInvoke(new Action(() => textboxTweet.Text = user.firstName));
             });
             FeedStorage.Storage().AddObserver(this, (SortedSet<IFeedItem> feedItems) =>
             {
-                textBoxFeed.Invoke(new Action(() => textBoxFeed.Text = UnpackTweets(feedItems)));
+                //textBoxFeed.Invoke(new Action(() => textBoxFeed.Text = UnpackTweets(feedItems)));
+                Console.WriteLine(UnpackTweets(feedItems));
             });
 
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
@@ -94,11 +95,11 @@ namespace NewsAggregator
             }));
         }
 
-        private async void ButtonUpdateTweeterFeed_Click(object sender, EventArgs e)
+        private void ButtonUpdateTweeterFeed_Click(object sender, EventArgs e)
         {
             this.Enabled = false;
             textBoxFeed.Clear();
-            SortedSet<IFeedItem> feedItems = await feedFacade.GetFeed(SocialNetwork.Tweeter, MAXIMUN_TWEETS, (delegate (Error error)
+            feedFacade.GetFeed(SocialNetwork.Tweeter, MAXIMUN_TWEETS, (delegate (Error error)
             {
                 if (error != null)
                 {
@@ -106,11 +107,10 @@ namespace NewsAggregator
                 }
                 else
                 {
-                    MessageBox.Show("Here are your tweeter feed!");
+                    //MessageBox.Show("Here are your tweeter feed!");
                     this.Enabled = true;
                 }
             }));
-            textBoxFeed.Text = UnpackTweets(feedItems);
         }
 
         private string UnpackTweets(SortedSet<IFeedItem> feedItems)
@@ -119,8 +119,9 @@ namespace NewsAggregator
             foreach (IFeedItem tweet in feedItems)
             {
                 string tweetText = tweet.FullText;
+                string creationTime = tweet.CreatedAt.ToString();
                 string tweetAuthor = tweet.CreatedBy.ToString();
-                feed += tweetAuthor + ":\n";
+                feed += tweetAuthor + " " + creationTime + ":\n";
                 feed += tweetText + "\n\n\n";
             }
             return feed;

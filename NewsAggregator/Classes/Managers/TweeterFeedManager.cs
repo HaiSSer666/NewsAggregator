@@ -11,25 +11,23 @@ namespace NewsAggregator
 {
     class TweeterFeedManager
     {
-        public async Task<SortedSet<IFeedItem>> GetFeed(int maximumTweets, FeedCallback feedCallback)
+        public void GetFeed(int maximumTweets, FeedCallback feedCallback)
         {
             try
             {
                 IEnumerable<ITweet> tweets = Timeline.GetHomeTimeline(maximumTweets);
                 feedCallback(null);
-                return await SaveTweetsToStorage(tweets);
+                SaveTweetsToStorage(tweets);
             }
             catch (Tweetinvi.Exceptions.TwitterNullCredentialsException ex)
             {
                 feedCallback(new Error("TweeterErrorDomain", 3, "You are not logged in to perform this action"));
                 Console.WriteLine(ex.Credentials);
-                return null;
             }
             catch (Tweetinvi.Exceptions.TwitterException ex)
             {
                 feedCallback(new Error("TweeterErrorDomain", 2, "Something went wrong"));
                 Console.WriteLine(ex.TwitterDescription);
-                return null;
             }
         }
 
@@ -39,7 +37,7 @@ namespace NewsAggregator
             SortedSet<IFeedItem> feedItems = await feedStorage.GetAsync();
         }
 
-        public async Task<SortedSet<IFeedItem>> SaveTweetsToStorage(IEnumerable<ITweet> tweets)
+        public async void SaveTweetsToStorage(IEnumerable<ITweet> tweets)
         {
             FeedStorage feedStorage = FeedStorage.Storage();
             SortedSet<IFeedItem> feedItems = await feedStorage.GetAsync();
@@ -54,7 +52,6 @@ namespace NewsAggregator
                 tweet.RetweetCount));
             } 
             await feedStorage.SetAsync(feedItems);
-            return feedItems;
         }
     }
 }

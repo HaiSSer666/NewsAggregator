@@ -15,6 +15,7 @@ namespace NewsAggregator
         {
             RegisteredObserver<T> registeredObserver = new RegisteredObserver<T>(observer, onUpdate);
             registeredObserversList.Add(registeredObserver);
+            registeredObserver.onUpdateStorage(GetSync());
         }
 
         public void RemoveObserver(IObserver observer)

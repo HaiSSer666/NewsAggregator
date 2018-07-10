@@ -16,29 +16,31 @@ namespace NewsAggregator
         public static FeedStorage Storage()
         {
             if (instance == null)
-                instance = new FeedStorage();
+            {
+                 instance = new FeedStorage();
+            }    
             return instance;
         }
 
-        override protected SortedSet<IFeedItem> GetSync()
+        public FeedStorage()
         {
             SortedSet<IFeedItem> restoredFeedItems = (SortedSet<IFeedItem>)serealizator.Deserialize(PATH_TO_FEED);
-            if(restoredFeedItems != null)
+            if (restoredFeedItems != null)
             {
-                SetSync(restoredFeedItems);
-                return feedItems;
-            }
-            else
-            {
-                return feedItems;
+                this.feedItems = restoredFeedItems;
             }
         }
 
+        override protected SortedSet<IFeedItem> GetSync()
+        { 
+            return feedItems;
+        }
+
         override protected void SetSync(SortedSet<IFeedItem> feedItems)
-        {
-            serealizator.Serialize(feedItems, PATH_TO_FEED);
+        {    
             this.feedItems = feedItems;
             this.NotifyObservers(feedItems);
+            serealizator.Serialize(feedItems, PATH_TO_FEED);
         }
     }
 }

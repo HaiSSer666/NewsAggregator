@@ -8,6 +8,12 @@ namespace NewsAggregator
 {
     class SyncStorage<T> : IStorage<T>
     {
+        //public async void Update(T obj)
+        //{
+        //    await SetAsync(obj);
+        //    await GetAsync();
+        //}
+
         public async Task<T> GetAsync()
         {
             return await Task.Run(() =>

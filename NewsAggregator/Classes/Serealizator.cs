@@ -9,12 +9,20 @@ namespace NewsAggregator
     {
         public void Serialize(object serializable, string pathToFile)
         {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(pathToFile,
-                         FileMode.OpenOrCreate,
-                         FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, serializable);
-            stream.Close();
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(pathToFile,
+                                               FileMode.OpenOrCreate,
+                                               FileAccess.Write, 
+                                               FileShare.None);
+                formatter.Serialize(stream, serializable);
+                stream.Close();
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine("Error by handling " + ex.Source);
+            }
         }
 
         public object Deserialize(string pathToFile)

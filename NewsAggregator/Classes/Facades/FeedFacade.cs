@@ -10,21 +10,22 @@ namespace NewsAggregator
     {
         TweeterFeedManager tweeterFeedManager = new TweeterFeedManager();
 
-        public async Task<SortedSet<IFeedItem>> GetFeed(SocialNetwork socialNetwork, int maximumTweets, FeedCallback feedCallback)
+        public void GetFeed(SocialNetwork socialNetwork, int maximumTweets, FeedCallback feedCallback)
         {
             switch (socialNetwork)
             {
                 case SocialNetwork.Tweeter:
                     {
-                        return await tweeterFeedManager.GetFeed(maximumTweets, feedCallback);
+                        tweeterFeedManager.GetFeed(maximumTweets, feedCallback);
+                        break;
                     }
                 case SocialNetwork.Facebook:
                     {
-                        return null;
+                        return;
                     }
                 default:
                     {
-                        return null;
+                        return;
                     }
             }
         }
