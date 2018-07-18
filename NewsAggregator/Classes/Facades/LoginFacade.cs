@@ -2,12 +2,18 @@
 
 namespace NewsAggregator
 {
-    public class LoginManagerFacade : ILoginManager
+    public class LoginFacade : ILoginManager
     {
         TweeterLoginManager tweeterLoginManager = new TweeterLoginManager();
-        FacebookLoginManager facebookLoginManager = new FacebookLoginManager();
+        //FacebookLoginManager facebookLoginManager = new FacebookLoginManager();
+        IFacebookLoginManager fbLoginManager;
         public Dictionary<SocialNetwork, bool> loginInfo = new Dictionary<SocialNetwork, bool>();
 
+        public LoginFacade(IFacebookLoginManager fbLoginManager)
+        {
+            this.fbLoginManager = fbLoginManager;
+        }
+        
         public void Login(SocialNetwork socialNetwork, LoginCallback loginCallback)
         {
             switch (socialNetwork)
@@ -19,7 +25,8 @@ namespace NewsAggregator
                     }
                 case SocialNetwork.Facebook:
                     {
-                        facebookLoginManager.Login(loginCallback);
+                        //facebookLoginManager.Login(loginCallback);
+                        fbLoginManager.Login(loginCallback);
                         break;
                     } 
             }
@@ -37,6 +44,8 @@ namespace NewsAggregator
                     }
                 case SocialNetwork.Facebook:
                     {
+                        fbLoginManager.RestoreSession(restoreCallback);
+                        loginInfo.Add(SocialNetwork.Facebook, true);
                         break;
                     }
             }
