@@ -35,7 +35,7 @@
             this.tweeterLoginButton = new System.Windows.Forms.Button();
             this.facebookLoginButton = new System.Windows.Forms.Button();
             this.labelFeed = new System.Windows.Forms.Label();
-            this.buttonUpdateTweeterFeed = new System.Windows.Forms.Button();
+            this.buttonUpdateFeed = new System.Windows.Forms.Button();
             this.textBoxFeed = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -106,15 +106,15 @@
             this.labelFeed.TabIndex = 12;
             this.labelFeed.Text = "Here are you last news!";
             // 
-            // buttonUpdateTweeterFeed
+            // buttonUpdateFeed
             // 
-            this.buttonUpdateTweeterFeed.Location = new System.Drawing.Point(228, 453);
-            this.buttonUpdateTweeterFeed.Name = "buttonUpdateTweeterFeed";
-            this.buttonUpdateTweeterFeed.Size = new System.Drawing.Size(108, 23);
-            this.buttonUpdateTweeterFeed.TabIndex = 13;
-            this.buttonUpdateTweeterFeed.Text = "Update Tweeter Feed";
-            this.buttonUpdateTweeterFeed.UseVisualStyleBackColor = true;
-            this.buttonUpdateTweeterFeed.Click += new System.EventHandler(this.ButtonUpdateTweeterFeed_Click);
+            this.buttonUpdateFeed.Location = new System.Drawing.Point(228, 453);
+            this.buttonUpdateFeed.Name = "buttonUpdateFeed";
+            this.buttonUpdateFeed.Size = new System.Drawing.Size(108, 23);
+            this.buttonUpdateFeed.TabIndex = 13;
+            this.buttonUpdateFeed.Text = "Update Feed";
+            this.buttonUpdateFeed.UseVisualStyleBackColor = true;
+            this.buttonUpdateFeed.Click += new System.EventHandler(this.ButtonUpdateFeed_Click);
             // 
             // textBoxFeed
             // 
@@ -131,7 +131,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 485);
             this.Controls.Add(this.textBoxFeed);
-            this.Controls.Add(this.buttonUpdateTweeterFeed);
+            this.Controls.Add(this.buttonUpdateFeed);
             this.Controls.Add(this.labelFeed);
             this.Controls.Add(this.facebookLoginButton);
             this.Controls.Add(this.tweeterLoginButton);
@@ -154,7 +154,7 @@
         private System.Windows.Forms.Button tweeterLoginButton;
         private System.Windows.Forms.Button facebookLoginButton;
         private System.Windows.Forms.Label labelFeed;
-        private System.Windows.Forms.Button buttonUpdateTweeterFeed;
+        private System.Windows.Forms.Button buttonUpdateFeed;
         private System.Windows.Forms.RichTextBox textBoxFeed;
     }
 }
