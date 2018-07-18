@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ namespace NewsAggregator
 {
     class FacebookFeedItem : IFeedItem
     {
+        [JsonProperty(PropertyName = "created_time")]
         DateTime createdAt;
         string createdBy;
+        [JsonProperty(PropertyName = "message")]
         string fullText;
 
         public FacebookFeedItem()
@@ -43,6 +46,7 @@ namespace NewsAggregator
                 createdBy = value;
             }
         }
+        
         public string FullText
         {
             get
