@@ -11,11 +11,11 @@ namespace NewsAggregator
 {
     class TweeterFeedManager
     {
-        public void GetFeed(int maximumTweets, FeedCallback feedCallback)
+        public void GetFeed(FeedCallback feedCallback)
         {
             try
             {
-                IEnumerable<ITweet> tweets = Timeline.GetHomeTimeline(maximumTweets);
+                IEnumerable<ITweet> tweets = Timeline.GetHomeTimeline();
                 feedCallback(null);
                 SaveTweetsToStorage(tweets);
             }
@@ -37,21 +37,24 @@ namespace NewsAggregator
             SortedSet<IFeedItem> feedItems = await feedStorage.GetAsync();
         }
 
-        public async void SaveTweetsToStorage(IEnumerable<ITweet> tweets)
+        public void SaveTweetsToStorage(IEnumerable<ITweet> tweets)
         {
             FeedStorage feedStorage = FeedStorage.Storage();
-            SortedSet<IFeedItem> feedItems = await feedStorage.GetAsync();
-            foreach(ITweet tweet in tweets)
+            feedStorage.Update(delegate (SortedSet<IFeedItem> feedItems)
             {
-                feedItems.Add(new TweeterFeedItem(
-                tweet.CreatedAt, 
-                tweet.CreatedBy.ToString(), 
-                tweet.FullText, 
-                tweet.IsRetweet,
-                tweet.PublishedTweetLength,
-                tweet.RetweetCount));
-            } 
-            await feedStorage.SetAsync(feedItems);
+                feedItems = feedStorage.feedItems;
+                foreach (ITweet tweet in tweets)
+                {
+                    feedItems.Add(new TweeterFeedItem(
+                    tweet.CreatedAt,
+                    tweet.CreatedBy.ToString(),
+                    tweet.FullText,
+                    tweet.IsRetweet,
+                    tweet.PublishedTweetLength,
+                    tweet.RetweetCount));
+                }
+                return feedItems;
+            });
         }
     }
 }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace NewsAggregator
 {
+    delegate T UpdateCallback<T>(T updatedValue);
+
     class SyncStorage<T> : IStorage<T>
     {
-        //public async void Update(T obj)
-        //{
-        //    await SetAsync(obj);
-        //    await GetAsync();
-        //}
+        public async void Update(UpdateCallback<T> updateCallback)
+        {
+            T beforeUpdate = await GetAsync();
+            T afterUpdate = updateCallback(beforeUpdate);
+            await SetAsync(afterUpdate);
+        }
 
         public async Task<T> GetAsync()
         {
