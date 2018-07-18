@@ -9,35 +9,44 @@ namespace NewsAggregator
 
     public partial class MainForm : Form
     {
-        public LoginManagerFacade loginManagerFacade; 
+        public LoginFacade loginManagerFacade; 
         public PublishFacade publishFacade;
         public FeedFacade feedFacade;
 
         private const int TWEET_SIZE = 140;
-        private const int MAXIMUN_TWEETS = 40;
 
-        public MainForm(LoginManagerFacade loginManagerFacade, PublishFacade publishFacade, FeedFacade feedFacade)
+        public MainForm()
         {     
             InitializeComponent();
 
-            this.loginManagerFacade = loginManagerFacade;
-            this.publishFacade = publishFacade;
-            this.feedFacade = feedFacade;
+            FacebookService fbService = new FacebookService();
+
+            this.loginManagerFacade = new LoginFacade(fbService);
+            this.publishFacade = new PublishFacade();
+            this.feedFacade = new FeedFacade(fbService);
 
             UserStorage.Storage().AddObserver(this, (User user) =>
             {
-                //on user info is updated
                 //textboxTweet.BeginInvoke(new Action(() => textboxTweet.Text = user.firstName));
+                //Console.WriteLine(user.firstName);
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!USER UPDATED!!!!!!!!!!!!!!!!!!!!");
             });
             FeedStorage.Storage().AddObserver(this, (SortedSet<IFeedItem> feedItems) =>
             {
                 //textBoxFeed.Invoke(new Action(() => textBoxFeed.Text = UnpackTweets(feedItems)));
-                Console.WriteLine(UnpackTweets(feedItems));
+                //Console.WriteLine(UnpackTweets(feedItems));
             });
 
             loginManagerFacade.RestoreSession(SocialNetwork.Tweeter, (delegate ()
             {
                 tweeterLoginButton.Enabled = false;
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!SESSION TWEETER RESTORED!!!!!!!!!!!!!!!!!!!!");
+            }));
+
+            loginManagerFacade.RestoreSession(SocialNetwork.Facebook, (delegate ()
+            {
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!SESSION FB RESTORED!!!!!!!!!!!!!!!!!!!!");
+                facebookLoginButton.Enabled = false;
             }));
         }
 
@@ -95,11 +104,24 @@ namespace NewsAggregator
             }));
         }
 
-        private void ButtonUpdateTweeterFeed_Click(object sender, EventArgs e)
+        private void ButtonUpdateFeed_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            //this.Enabled = false;
             textBoxFeed.Clear();
-            feedFacade.GetFeed(SocialNetwork.Tweeter, MAXIMUN_TWEETS, (delegate (Error error)
+            //feedFacade.GetFeed(SocialNetwork.Tweeter, (delegate (Error error)
+            //{
+            //    if (error != null)
+            //    {
+            //        MessageBox.Show(error.errorDescription);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Here are your tweeter feed!");
+            //        this.Enabled = true;
+            //    }
+            //}));
+
+            feedFacade.GetFeed(SocialNetwork.Facebook, (delegate (Error error)
             {
                 if (error != null)
                 {
@@ -108,7 +130,7 @@ namespace NewsAggregator
                 else
                 {
                     //MessageBox.Show("Here are your tweeter feed!");
-                    this.Enabled = true;
+                    //this.Enabled = true;
                 }
             }));
         }
