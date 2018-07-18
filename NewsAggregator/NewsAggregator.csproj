@@ -140,8 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Facades\FeedFacade.cs" />
-    <Compile Include="Classes\Feeds\FacebookFeedItem.cs" />
+    <Compile Include="Classes\FacebookPage.cs" />
+    <Compile Include="Classes\FacebookService.cs" />
+    <Compile Include="Classes\Feeds\FacebookFeedPage.cs" />
     <Compile Include="Classes\Feeds\TweeterFeedItem.cs" />
+    <Compile Include="Classes\Managers\FacebookFeedManager.cs" />
     <Compile Include="Classes\Storages\FeedStorage.cs" />
     <Compile Include="Classes\Storages\ObservableStorage.cs" />
     <Compile Include="Classes\Storages\TokenStorage.cs" />
@@ -153,7 +156,7 @@
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Managers\FacebookLoginManager.cs" />
-    <Compile Include="Classes\Facades\LoginManagerFacade.cs" />
+    <Compile Include="Classes\Facades\LoginFacade.cs" />
     <Compile Include="Classes\Facades\PublishFacade.cs" />
     <Compile Include="Classes\Users\FacebookUser.cs" />
     <Compile Include="Classes\SharedTypes.cs" />
@@ -163,6 +166,8 @@
     <Compile Include="Classes\Users\User.cs" />
     <Compile Include="Classes\Storages\UserStorage.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="Interfaces\IFacebookFeedManager.cs" />
+    <Compile Include="Interfaces\IFacebookLoginManager.cs" />
     <Compile Include="Interfaces\IFeedItem.cs" />
     <Compile Include="Interfaces\ILoginManager.cs" />
     <Compile Include="Interfaces\IObservable.cs" />
